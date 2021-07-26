@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToTaxi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Activated="Window_Activated" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="/1.png"/>
+    </Window.Background>
     <Grid>
-
+        <TextBox x:Name="Log1" HorizontalAlignment="Left" Margin="47,140,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
+        <PasswordBox Name="Pas1" HorizontalAlignment="Left" Margin="47,182,0,0" VerticalAlignment="Top" Width="193"/>
+        <Button x:Name="vx" Click="vx_Click" Content="Войти" HorizontalAlignment="Left" Margin="139,215,0,0" VerticalAlignment="Top" Width="101" Height="25" Background="#FF4A7DB9"/>
+        <Button x:Name="reg" Click="reg_Click" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="42,249,0,0" VerticalAlignment="Top" Width="198" Height="25" Background="#FF46C520"/>
+        <CheckBox x:Name="Cheak" Content="" HorizontalAlignment="Left" Margin="46,217,0,0" VerticalAlignment="Top" Width="85" Height="30"/>
     </Grid>
 </Window>

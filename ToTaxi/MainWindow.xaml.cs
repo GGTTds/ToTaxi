@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace ToTaxi
 {
@@ -24,5 +25,61 @@ namespace ToTaxi
         {
             InitializeComponent();
         }
+
+        private void vx_Click(object sender, RoutedEventArgs e)
+        {
+            using(TaxiInDronContext re = new TaxiInDronContext())
+            {
+                var s = re.Users.Where(p => p.LogininVx == Log1.Text && p.PasswordInVx == Pas1.Password);
+                if ( s == null)
+                {
+                    MessageBox.Show(" Введены некоректные данные", " Ошибека");
+                }
+                BMenu d = new BMenu();
+                d.Show();
+                if(Cheak.IsChecked == true)
+                {
+                    using(StreamWriter rty = new StreamWriter("login.ttr"))
+                    {
+                        rty.WriteLine(Log1.Text);
+                    }
+                }
+                else
+                {
+                    using (StreamWriter rty = new StreamWriter("login.ttr"))
+                    {
+                        rty.WriteLine("");
+                    }
+                }
+                this.Close();
+            }
+        }
+
+        private void reg_Click(object sender, RoutedEventArgs e)
+        {
+            Registr er = new Registr();
+            er.Show();
+            this.Close();
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            using (StreamReader we = new StreamReader("login.ttr"))
+            {
+                DF();
+            }
+        }
+    
+    public void DF()
+        {
+            using(StreamReader we = new StreamReader("login.ttr"))
+            {
+                if (we != null)
+                {
+                    Log1.Text = we.ReadLine();
+                }
+            }
+        }
+    
     }
 }
