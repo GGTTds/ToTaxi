@@ -31,15 +31,19 @@ namespace ToTaxi
             using(TaxiInDronContext re = new TaxiInDronContext())
             {
                 var s = re.Users.Where(p => p.LogininVx == Log1.Text && p.PasswordInVx == Pas1.Password);
-                if ( s == null)
+                if ( s == null|| Pas1.Password.Length == 0)
                 {
                     MessageBox.Show(" Введены некоректные данные", " Ошибека");
                 }
-                MainMenu d = new MainMenu();
-                d.Show();
-                foreach (var b in s)
+                else
                 {
-                    Global._ID = b.Id;
+                    foreach (var b in s)
+                    {
+                        Global._ID = b.Id;
+                    }
+                    MainMenu d = new MainMenu();
+                    d.Show();
+                    this.Close();
                 }
                 if(Cheak.IsChecked == true)
                 {
@@ -55,7 +59,7 @@ namespace ToTaxi
                         rty.WriteLine("");
                     }
                 }
-                this.Close();
+               
             }
         }
 

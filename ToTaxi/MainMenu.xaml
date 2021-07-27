@@ -11,7 +11,7 @@
         <Button x:Name="prof" Click="prof_Click" Content="Профиль" HorizontalAlignment="Right" Margin="0,61,1152,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
         <Button Content="Упр. пользователями" HorizontalAlignment="Right" Margin="0,95,1152,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
         <Button Content="Упр. ролями" HorizontalAlignment="Right" Margin="0,129,1152,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
-        <Button Click="Button_Click" Content="Выход" HorizontalAlignment="Left" Margin="29,512,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Width="92"/>
+        <Button Click="Button_Click" Content="Выход" HorizontalAlignment="Left" Margin="29,512,0,32" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Width="92"/>
 
     </Grid>
 </Window>
