@@ -54,9 +54,35 @@ namespace ToTaxi
                             w1.Source = bi;
                         }
                     }
+
+                    fam.Text = f.Fam;
+                    im.Text = f.Name;
+                    ot.Text = f.Otc;
+                    eml.Text = f.Email;
+                    tel.Text = f.Tel;
+                    dat.SelectedDate = f.DateBird0;
+                    pas.Password = f.PasswordInVx;
+                    if (f.Pol == 10)
+                    {
+                        poll.Text = "Мужчина";
+                    }
+                    else
+                    {
+                        poll.Text = "Женщина";
+                    }
+                
                 }
+            
             }
+        
         }
+   
+    
+    
+           
+    
+    
+    
     }
 }
           
