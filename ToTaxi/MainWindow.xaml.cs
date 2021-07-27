@@ -37,6 +37,10 @@ namespace ToTaxi
                 }
                 MainMenu d = new MainMenu();
                 d.Show();
+                foreach (var b in s)
+                {
+                    Global._ID = b.Id;
+                }
                 if(Cheak.IsChecked == true)
                 {
                     using(StreamWriter rty = new StreamWriter("login.ttr"))

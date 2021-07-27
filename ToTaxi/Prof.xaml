@@ -9,7 +9,11 @@
       Title="Prof">
 
     <Grid>
-        <Image x:Name="w1" HorizontalAlignment="Right" Height="125" Margin="0,79,532,0" VerticalAlignment="Top" Width="141"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="w1"  HorizontalAlignment="Right" Height="158" Margin="0,73,491,0" VerticalAlignment="Top" Width="183"  />
+        <StackPanel Margin="322,0,0,0"/>
 
     </Grid>
 </Page>

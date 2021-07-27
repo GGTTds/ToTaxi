@@ -28,5 +28,10 @@ namespace ToTaxi
         {
             this.Close();
         }
+
+        private void prof_Click(object sender, RoutedEventArgs e)
+        {
+            Frame1.Navigate(new Prof());
+        }
     }
 }

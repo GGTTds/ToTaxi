@@ -8,7 +8,7 @@
         Title="MainMenu" Height="533" Width="947" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FF7C0081">
         <Frame x:Name="Frame1" Content="" Margin="222,33,0,0" HorizontalAlignment="Left" Width="707" Height="407" VerticalAlignment="Top"/>
-        <Button Content="Профиль" HorizontalAlignment="Right" Margin="0,67,751,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
+        <Button x:Name="prof" Click="prof_Click" Content="Профиль" HorizontalAlignment="Right" Margin="0,67,751,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
         <Button Content="Упр. пользователями" HorizontalAlignment="Right" Margin="0,101,751,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
         <Button Content="Упр. ролями" HorizontalAlignment="Right" Margin="0,135,751,0" VerticalAlignment="Top" Width="158" Height="29" Background="#FF73DA1C" BorderBrush="{x:Null}" Foreground="Black" OpacityMask="#FF9B3434"/>
         <Button Click="Button_Click" Content="Выход" HorizontalAlignment="Left" Margin="25,481,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Width="92"/>
