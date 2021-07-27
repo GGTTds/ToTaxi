@@ -35,7 +35,7 @@ namespace ToTaxi
                 {
                     MessageBox.Show(" Введены некоректные данные", " Ошибека");
                 }
-                BMenu d = new BMenu();
+                MainMenu d = new MainMenu();
                 d.Show();
                 if(Cheak.IsChecked == true)
                 {

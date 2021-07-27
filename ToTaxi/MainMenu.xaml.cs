@@ -13,13 +13,18 @@ using System.Windows.Shapes;
 namespace ToTaxi
 {
     /// <summary>
-    /// Логика взаимодействия для BMenu.xaml
+    /// Логика взаимодействия для MainMenu.xaml
     /// </summary>
-    public partial class BMenu : Window
+    public partial class MainMenu : Window
     {
-        public BMenu()
+        public MainMenu()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

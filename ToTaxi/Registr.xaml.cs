@@ -43,6 +43,14 @@ namespace ToTaxi
                 {
                     de.Append("Введиете email \n");
                 }
+                if (Log.Text.Length == 0)
+                {
+                    de.Append("Введиете логин \n");
+                }
+                if (ps1.Password.Length == 0)
+                {
+                    de.Append("Введиете пароль \n");
+                }
                 if (de.Length == 0)
                 {
                     try
