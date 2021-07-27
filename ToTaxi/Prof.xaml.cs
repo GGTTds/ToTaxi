@@ -8,25 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ToTaxi
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenu.xaml
+    /// Логика взаимодействия для Prof.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class Prof : Page
     {
-        public MainMenu()
+        public Prof()
         {
             InitializeComponent();
-            Fram.MainFF = Frame1;
-            Frame1.Navigate(new Prof()); 
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
