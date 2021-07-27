@@ -27,6 +27,11 @@ namespace ToTaxi
         {
             InitializeComponent();
             FOIDG();
+            f2.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Hidden;
+            f1_Copy.Visibility = Visibility.Hidden;
+            m1.Visibility = Visibility.Hidden;
+            m2.Visibility = Visibility.Hidden;
         }
 
 
@@ -55,6 +60,62 @@ namespace ToTaxi
                         }
                     }
 
+                    GoBack();
+                
+                }
+            
+            }
+        
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            fg.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Visible;
+            f2.Visibility = Visibility.Visible;
+            f1_Copy.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Visible;
+            m2.Visibility = Visibility.Visible;
+            fam.IsReadOnly = false;
+            im.IsReadOnly = false;
+            ot.IsReadOnly = false;
+            eml.IsReadOnly = false;
+            tel.IsReadOnly = false;
+            dat.IsEnabled = true;
+            pas.IsEnabled = true;
+            poll.IsReadOnly = false;
+        }
+
+        private void f2_Click(object sender, RoutedEventArgs e)
+        {
+            f2.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Hidden;
+            f1_Copy.Visibility = Visibility.Hidden;
+            fg.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Visible;
+            m2.Visibility = Visibility.Visible;
+            GoSave();
+
+        }
+
+        private void f1_Click(object sender, RoutedEventArgs e)
+        {
+            f2.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Hidden;
+            f1_Copy.Visibility = Visibility.Hidden;
+            fg.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Hidden;
+            m2.Visibility = Visibility.Hidden;
+            GoBack();
+        }
+    
+    public void GoBack()
+        {
+            using (TaxiInDronContext v = new TaxiInDronContext())
+            {
+                var s = v.Users.Where(p => p.Id == Global._ID);
+                foreach (var f in s)
+                {
                     fam.Text = f.Fam;
                     im.Text = f.Name;
                     ot.Text = f.Otc;
@@ -65,24 +126,73 @@ namespace ToTaxi
                     if (f.Pol == 10)
                     {
                         poll.Text = "Мужчина";
+                        m1.IsChecked = true;
                     }
                     else
                     {
                         poll.Text = "Женщина";
+                        m2.IsChecked = true;
                     }
-                
+                    fam.IsReadOnly = true; 
+                    im.IsReadOnly = true;
+                    ot.IsReadOnly = true;
+                    eml.IsReadOnly = true;
+                    tel.IsReadOnly = true;
+                    dat.IsEnabled = false;
+                    pas.IsEnabled = false;
+                    poll.IsReadOnly = true;
                 }
-            
             }
-        
         }
-   
     
-    
-           
-    
-    
-    
+     public void GoSave()
+        {
+            fam.IsReadOnly = true;
+            im.IsReadOnly = true;
+            ot.IsReadOnly = true;
+            eml.IsReadOnly = true;
+            tel.IsReadOnly = true;
+            dat.IsEnabled = false;
+            pas.IsEnabled = false;
+            poll.IsReadOnly = true;
+            using (TaxiInDronContext v = new TaxiInDronContext())
+            {
+                var g = v.Users.Where(p => p.Id == Global._ID).SingleOrDefault();
+                g.Name = im.Text;
+                g.Fam = fam.Text;
+                g.Otc = ot.Text;
+                g.PasswordInVx = pas.Password;
+                g.Tel = tel.Text;
+                g.DateBird0 = dat.SelectedDate;
+                g.Email = eml.Text;
+                if(m1.IsChecked == true)
+                {
+                    g.Pol = 10;
+                }
+                if(m2.IsChecked == true)
+                {
+                    g.Pol = 11;
+                }
+                v.SaveChanges();
+            }
+
+
+        }
+
+        private void f1_Copy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void m2_Click(object sender, RoutedEventArgs e)
+        {
+            m1.IsChecked = false;
+        }
+
+        private void m1_Click(object sender, RoutedEventArgs e)
+        {
+            m2.IsChecked = false;
+        }
     }
 }
           
