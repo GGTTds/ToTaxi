@@ -15,6 +15,7 @@ using System.IO;
 using System.Net;
 using Image = System.Drawing.Image;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 
 namespace ToTaxi
 {
@@ -23,6 +24,7 @@ namespace ToTaxi
     /// </summary>
     public partial class Prof : Page
     {
+        byte[] fot;
         public Prof()
         {
             InitializeComponent();
@@ -46,17 +48,25 @@ namespace ToTaxi
                     {
                         using (Image img = Image.FromStream(ms))
                         {
-                            img.Save($@"Img/{f.Id}.Png");
-                            var path = $@"Img/{f.Id}.Png";
-                            Bitmap bmp = new Bitmap(path);
-                            MemoryStream ms1 = new MemoryStream();
-                            bmp.Save(ms1, ImageFormat.Png);
-                            ms1.Position = 0;
-                            BitmapImage bi = new BitmapImage();
-                            bi.BeginInit();
-                            bi.StreamSource = ms1;
-                            bi.EndInit();
-                            w1.Source = bi;
+                            try
+                            {
+                                img.Save($@"Img/{f.Id}.Png");
+                                var path = $@"Img/{f.Id}.Png";
+                                Bitmap bmp = new Bitmap(path);
+                                MemoryStream ms1 = new MemoryStream();
+                                bmp.Save(ms1, ImageFormat.Png);
+                                ms1.Position = 0;
+                                BitmapImage bi = new BitmapImage();
+                                bi.BeginInit();
+                                bi.StreamSource = ms1;
+                                bi.EndInit();
+                                w1.Source = bi;
+                            }
+                            catch
+                            {
+                                File.Delete($@"Img/{f.Id}.Png");
+                                FOIDG();
+                            }
                         }
                     }
 
@@ -92,8 +102,8 @@ namespace ToTaxi
             f1.Visibility = Visibility.Hidden;
             f1_Copy.Visibility = Visibility.Hidden;
             fg.Visibility = Visibility.Visible;
-            m1.Visibility = Visibility.Visible;
-            m2.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Hidden;
+            m2.Visibility = Visibility.Hidden;
             GoSave();
 
         }
@@ -165,6 +175,7 @@ namespace ToTaxi
                 g.Tel = tel.Text;
                 g.DateBird0 = dat.SelectedDate;
                 g.Email = eml.Text;
+                g.Photo = fot;
                 if (m1.IsChecked == true)
                 {
                     g.Pol = 10;
@@ -174,6 +185,7 @@ namespace ToTaxi
                     g.Pol = 11;
                 }
                 v.SaveChanges();
+                FOIDG();
             }
 
 
@@ -181,7 +193,16 @@ namespace ToTaxi
 
         private void f1_Copy_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog dia = new OpenFileDialog();
+            dia.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
+            if (dia.ShowDialog() == true)
+            {
+                fot = File.ReadAllBytes(dia.FileName);
+            }
+            if (fot != null)
+            {
+                MessageBox.Show("Фото добавлено");
+            }
         }
 
         private void m2_Click(object sender, RoutedEventArgs e)
@@ -193,6 +214,8 @@ namespace ToTaxi
         {
             m2.IsChecked = false;
         }
+
+       
     }
 }
 

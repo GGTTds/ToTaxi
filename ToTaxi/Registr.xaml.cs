@@ -118,13 +118,11 @@ namespace ToTaxi
         }
           public void GoFoto()
         {
-            string Nam;
             OpenFileDialog dia = new OpenFileDialog();
             dia.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
             if (dia.ShowDialog() == true)
             {
-                Nam = dia.FileName;
-                fot = File.ReadAllBytes(Nam);
+                fot = File.ReadAllBytes(dia.FileName);
             }
             if (fot != null)
             {
