@@ -61,7 +61,7 @@ namespace ToTaxi
                         _user.DateBird0 = datt.SelectedDate;
                         _user.Email = eml.Text;
                         _user.FuncPp = null;
-                        _user.FuncPpNavigation = null;
+                        _user.FuncPps = null;
                         _user.LogininVx = Log.Text;
                         _user.PasswordInVx = ps1.Password;
                         _user.Pol = pol4;

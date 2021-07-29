@@ -294,7 +294,7 @@ namespace ToTaxi
 
         private void Rol_Click(object sender, RoutedEventArgs e)
         {
-
+            Fram.MainFF.Navigate(new Roul());
         }
     }
 }

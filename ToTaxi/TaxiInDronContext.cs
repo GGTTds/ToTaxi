@@ -45,6 +45,11 @@ namespace ToTaxi
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.HasOne(d => d.WhoIsItFuncNavigation)
+                    .WithMany(p => p.FuncPps)
+                    .HasForeignKey(d => d.WhoIsItFunc)
+                    .HasConstraintName("FK_User_FuncPP");
             });
 
             modelBuilder.Entity<PolPol>(entity =>
@@ -125,11 +130,6 @@ namespace ToTaxi
                 entity.Property(e => e.Photo).HasColumnType("image");
 
                 entity.Property(e => e.Tel).HasMaxLength(50);
-
-                entity.HasOne(d => d.FuncPpNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.FuncPp)
-                    .HasConstraintName("FK_User_FuncPP");
 
                 entity.HasOne(d => d.PolNavigation)
                     .WithMany(p => p.Users)
