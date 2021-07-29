@@ -19,6 +19,7 @@ namespace ToTaxi
     /// </summary>
     public partial class YprPol : Page
     {
+        List<User> v1;
         public YprPol()
         {
             InitializeComponent();
@@ -41,7 +42,8 @@ namespace ToTaxi
         {
             using (TaxiInDronContext v = new TaxiInDronContext())
             {
-                dd.ItemsSource = v.Users.ToList();
+                v1 = v.Users.ToList();
+                dd.ItemsSource = v1;
             }
         }
 
@@ -49,12 +51,16 @@ namespace ToTaxi
         {
             ff1.Text = null;
         }
+        private void dd1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            dd1.Text = null;
+        }
 
         public void Red()
         {
             using (TaxiInDronContext v = new TaxiInDronContext())
             {
-                var t = v.RoulPps.Where(p => p.WhoIsroul == Global._ID);
+                var t = v.FuncPps.Where(p => p.WhoIsItFunc == Global._ID);
                 foreach (var y in t)
                 {
                     if (y.Name == "Управление пользователями")
@@ -67,7 +73,40 @@ namespace ToTaxi
            
         }
     
-        
+        public void ToTextBox()
+        {
+            if(ff1.Text.Length > 0)
+            {
+                using( TaxiInDronContext g = new TaxiInDronContext())
+                {
+                    dd.ItemsSource = g.Users.Where(p => p.Fam.Contains(ff1.Text)).ToList();
+                }
+               
+            }
+            if (ff1.Text.Length == 0)
+            {
+                dd.ItemsSource = v1;
+            }
+            if (dd1.Text.Length > 0)
+            {
+                using (TaxiInDronContext g = new TaxiInDronContext())
+                {
+                    dd.ItemsSource = g.Users.Where(p => p.DateBird0.ToString().Contains(ff1.Text)).ToList();
+                }
+            }
+            if (ff1.Text == null)
+            {
+                dd.ItemsSource = v1;
+            }
+
+        }
+
+        private void ff1_KeyDown(object sender, KeyEventArgs e)
+        {
+            ToTextBox();
+        }
+
+      
     }
 
 }

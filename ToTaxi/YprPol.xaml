@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToTaxi"
       mc:Ignorable="d"
-      Title="YprPol" Width="1059" Height="461">
+      Title="YprPol" Width="1059" Height="461" >
 
     <Grid x:Name="ff" HorizontalAlignment="Center" Width="1004"   >
         <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="ff1" HorizontalAlignment="Left" Margin="24,82,0,0" Text="ФИО" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Введите сюда ФИО" GotFocus="TextBox_GotFocus"/>
-        <TextBox GotFocus="TextBox_GotFocus" x:Name="dd1" HorizontalAlignment="Left" Margin="284,82,0,0" Text="Дата рождения" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Пример: 19.06.2000"/>
+        <TextBox KeyDown="ff1_KeyDown" x:Name="ff1" HorizontalAlignment="Left" Margin="24,82,0,0" Text="ФИО" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Введите сюда ФИО" GotFocus="TextBox_GotFocus"/>
+        <TextBox KeyDown="ff1_KeyDown" GotFocus="dd1_GotFocus" x:Name="dd1" HorizontalAlignment="Left" Margin="284,82,0,0" Text="Дата рождения" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Пример: 19.06.2000"/>
     </Grid>
 </Page>
