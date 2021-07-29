@@ -49,7 +49,7 @@ namespace ToTaxi
 
         private void Rol_Click(object sender, RoutedEventArgs e)
         {
-            
+            Fram.MainFF.Navigate(new Roul());
         }
 
         private void ff_Click(object sender, RoutedEventArgs e)
@@ -72,6 +72,13 @@ namespace ToTaxi
                 v.FuncPps.RemoveRange(s);
                 v.SaveChanges();
                 datg.ItemsSource = v.FuncPps.Where(p => p.WhoIsItFunc == Global._ID).ToList();
+
+            }
+        }
+        public void AdmV()
+        {
+            if(Global._Rol == 1)
+            {
 
             }
         }

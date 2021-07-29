@@ -35,6 +35,14 @@ namespace ToTaxi
                 {
                     Global._ID = b.Id;
                 }
+                var s1 = re.RoulPps.Where(p => p.WhoIsroul == Global._ID).Where(p => p.Name.Contains("Администратор"));
+                foreach (var t in s1)
+                {
+                    if (t.Name == "Администратор")
+                    {
+                        Global._Rol = 1;
+                    }
+                }
                 if (Global._ID == 0)
                 {
                     MessageBox.Show(" Введены некоректные данные", " Ошибка");

@@ -21,7 +21,8 @@ namespace ToTaxi
         {
             InitializeComponent();
             Fram.MainFF = Frame1;
-            Frame1.Navigate(new Prof()); 
+            Frame1.Navigate(new Prof());
+            Adm();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,5 +35,15 @@ namespace ToTaxi
             Frame1.Navigate(new Prof());
         }
 
+        public void Adm()
+        {
+            yp.Visibility = Visibility.Hidden;
+            rr.Visibility = Visibility.Hidden;
+            if (Global._Rol == 1)
+            {
+                yp.Visibility = Visibility.Visible;
+                rr.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
