@@ -24,6 +24,7 @@ namespace ToTaxi
             InitializeComponent();
             RolGrid();
             FunGrid();
+            Rol.Background = Brushes.Black;
         }
     
     public void RolGrid()
@@ -48,12 +49,31 @@ namespace ToTaxi
 
         private void Rol_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void ff_Click(object sender, RoutedEventArgs e)
         {
+            var s = datg.SelectedItems.Cast<RoulPp>().ToList();
+            using(TaxiInDronContext v = new TaxiInDronContext())
+            {
+                v.RoulPps.RemoveRange(s);
+                v.SaveChanges();
+                datg.ItemsSource = v.RoulPps.Where(p => p.WhoIsroul == Global._ID).ToList();
 
+            }
+        }
+
+        private void ff1_Click(object sender, RoutedEventArgs e)
+        {
+            var s = datg_Copy.SelectedItems.Cast<FuncPp>().ToList();
+            using (TaxiInDronContext v = new TaxiInDronContext())
+            {
+                v.FuncPps.RemoveRange(s);
+                v.SaveChanges();
+                datg.ItemsSource = v.FuncPps.Where(p => p.WhoIsItFunc == Global._ID).ToList();
+
+            }
         }
     }
 

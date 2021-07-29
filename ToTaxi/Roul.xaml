@@ -35,7 +35,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="" x:Name="ff1">
+                            <Button Click="ff1_Click" x:Name="ff1">
                                 <Button.Background>
                                     <ImageBrush ImageSource="/561125.png" TileMode="None" Stretch="Uniform"/>
                                 </Button.Background>

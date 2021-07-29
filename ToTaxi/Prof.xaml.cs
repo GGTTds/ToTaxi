@@ -37,6 +37,7 @@ namespace ToTaxi
             f1_Copy.Visibility = Visibility.Hidden;
             m1.Visibility = Visibility.Hidden;
             m2.Visibility = Visibility.Hidden;
+            ls.Background = System.Windows.Media.Brushes.Black;
         }
 
 
