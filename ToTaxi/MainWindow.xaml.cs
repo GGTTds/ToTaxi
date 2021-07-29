@@ -28,28 +28,28 @@ namespace ToTaxi
 
         private void vx_Click(object sender, RoutedEventArgs e)
         {
-            using(TaxiInDronContext re = new TaxiInDronContext())
+            using (TaxiInDronContext re = new TaxiInDronContext())
             {
                 var s = re.Users.Where(p => p.LogininVx == Log1.Text && p.PasswordInVx == Pas1.Password);
                 foreach (var b in s)
                 {
                     Global._ID = b.Id;
                 }
-                if ( Global._ID == 0)
+                if (Global._ID == 0)
                 {
                     MessageBox.Show(" Введены некоректные данные", " Ошибка");
                     Pas1.Password = null;
                 }
                 else
                 {
-                   
+
                     MainMenu d = new MainMenu();
                     d.Show();
                     this.Close();
                 }
-                if(Cheak.IsChecked == true)
+                if (Cheak.IsChecked == true)
                 {
-                    using(StreamWriter rty = new StreamWriter("login.ttr"))
+                    using (StreamWriter rty = new StreamWriter("login.ttr"))
                     {
                         rty.WriteLine(Log1.Text);
                     }
@@ -61,7 +61,7 @@ namespace ToTaxi
                         rty.WriteLine("");
                     }
                 }
-               
+
             }
         }
 
@@ -79,10 +79,10 @@ namespace ToTaxi
                 DF();
             }
         }
-    
-    public void DF()
+
+        public void DF()
         {
-            using(StreamReader we = new StreamReader("login.ttr"))
+            using (StreamReader we = new StreamReader("login.ttr"))
             {
                 if (we != null)
                 {
@@ -90,6 +90,6 @@ namespace ToTaxi
                 }
             }
         }
-    
+
     }
 }

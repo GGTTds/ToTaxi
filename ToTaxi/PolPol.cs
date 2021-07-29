@@ -7,9 +7,14 @@ namespace ToTaxi
 {
     public partial class PolPol
     {
+        public PolPol()
+        {
+            Users = new HashSet<User>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual User IdNavigation { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

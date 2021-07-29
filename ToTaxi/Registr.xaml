@@ -19,7 +19,7 @@
         <Label Content="Дата рождения" HorizontalAlignment="Left" Margin="16,156,0,0" VerticalAlignment="Top" Width="129" FontWeight="Bold"/>
         <TextBox x:Name="eml" HorizontalAlignment="Left" Margin="161,189,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="16,187,0,0" VerticalAlignment="Top" Width="129" FontWeight="Bold"/>
-        <TextBox  x:Name="tel" HorizontalAlignment="Left" Margin="161,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" KeyDown="tel_KeyDown" ToolTip="Пример +7 (999) 999 99-99"/>
+        <TextBox  x:Name="tel" HorizontalAlignment="Left" Margin="161,220,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  ToolTip="Пример +7 (999) 999 99-99"/>
         <Label Content="Телефон" HorizontalAlignment="Left" Margin="16,218,0,0" VerticalAlignment="Top" Width="129" FontWeight="Bold"/>
         <Label Content="Фото" HorizontalAlignment="Left" Margin="15,322,0,0" VerticalAlignment="Top" Width="129" FontWeight="Bold"/>
         <Label Content="Пол" HorizontalAlignment="Left" Margin="15,360,0,0" VerticalAlignment="Top" Width="129" FontWeight="Bold"/>

@@ -46,7 +46,7 @@ namespace ToTaxi
             {
                 var s = y.Users.Where(p => p.Id == Global._ID);
                 foreach (var f in s)
-                    if(f.Photo == null)
+                    if (f.Photo == null)
                     { GoBack(); }
                     else
                     {
@@ -84,9 +84,9 @@ namespace ToTaxi
                             }
                         }
 
-                    GoBack();
+                        GoBack();
 
-                }
+                    }
 
             }
 
@@ -172,21 +172,21 @@ namespace ToTaxi
         public void GoSave()
         {
             StringBuilder B = new StringBuilder();
-            if (pas.Password.Length < 6 )
+            if (pas.Password.Length < 6)
             {
                 B.Append("Пароль слишком короткий\n");
             }
-            if(pas.Password.Any(char.IsUpper) == false)
+            if (pas.Password.Any(char.IsUpper) == false)
             {
                 B.Append("Пароль должен содержать хотябы одну букву верхнего регистра\n");
             }
-            if(pas.Password.Any(Char.IsLower) == false)
+            if (pas.Password.Any(Char.IsLower) == false)
             {
                 B.Append("Пароль должен содержать хотябы одну букву нижнего регистра\n");
             }
-            if(IsValidEmail(eml.Text) == false )
+            if (IsValidEmail(eml.Text) == false)
             {
-               B.Append(" Введеите корректнкю почту\n");
+                B.Append(" Введеите корректнкю почту\n");
             }
             if (B.Length == 0)
             {

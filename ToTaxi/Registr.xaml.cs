@@ -23,7 +23,7 @@ namespace ToTaxi
             using (TaxiInDronContext v = new TaxiInDronContext())
             {
                 StringBuilder de = new StringBuilder();
-                if(im.Text.Length == 0)
+                if (im.Text.Length == 0)
                 {
                     de.Append("Введиете имя \n");
                 }
@@ -95,7 +95,7 @@ namespace ToTaxi
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            if( jjj.IsChecked == true)
+            if (jjj.IsChecked == true)
             {
                 jjj.IsChecked = false;
             }
@@ -116,7 +116,7 @@ namespace ToTaxi
         {
             GoFoto();
         }
-          public void GoFoto()
+        public void GoFoto()
         {
             OpenFileDialog dia = new OpenFileDialog();
             dia.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
@@ -130,9 +130,6 @@ namespace ToTaxi
             }
         }
 
-        private void tel_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            
-        }
+
     }
 }

@@ -9,5 +9,8 @@ namespace ToTaxi
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int? WhoIsroul { get; set; }
+
+        public virtual User WhoIsroulNavigation { get; set; }
     }
 }

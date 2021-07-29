@@ -9,6 +9,7 @@ namespace ToTaxi
     {
         public User()
         {
+            RoulPps = new HashSet<RoulPp>();
             Zakazs = new HashSet<Zakaz>();
         }
 
@@ -27,7 +28,8 @@ namespace ToTaxi
         public byte[] Photo { get; set; }
 
         public virtual FuncPp FuncPpNavigation { get; set; }
-        public virtual PolPol PolPol { get; set; }
+        public virtual PolPol PolNavigation { get; set; }
+        public virtual ICollection<RoulPp> RoulPps { get; set; }
         public virtual ICollection<Zakaz> Zakazs { get; set; }
     }
 }

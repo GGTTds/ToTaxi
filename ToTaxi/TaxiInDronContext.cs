@@ -51,17 +51,9 @@ namespace ToTaxi
             {
                 entity.ToTable("PolPol");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("Pol");
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.PolPol)
-                    .HasForeignKey<PolPol>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PolPol_User");
             });
 
             modelBuilder.Entity<RoulPp>(entity =>
@@ -73,6 +65,13 @@ namespace ToTaxi
                     .HasColumnName("ID");
 
                 entity.Property(e => e.Name).HasMaxLength(150);
+
+                entity.Property(e => e.WhoIsroul).HasColumnName("WhoISRoul");
+
+                entity.HasOne(d => d.WhoIsroulNavigation)
+                    .WithMany(p => p.RoulPps)
+                    .HasForeignKey(d => d.WhoIsroul)
+                    .HasConstraintName("FK_RoulPP_User");
             });
 
             modelBuilder.Entity<ToSatu>(entity =>
@@ -105,7 +104,7 @@ namespace ToTaxi
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.DateBird0).HasColumnType("datetime");
+                entity.Property(e => e.DateBird0).HasColumnType("date");
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 
@@ -131,6 +130,11 @@ namespace ToTaxi
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.FuncPp)
                     .HasConstraintName("FK_User_FuncPP");
+
+                entity.HasOne(d => d.PolNavigation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.Pol)
+                    .HasConstraintName("FK_User_PolPol");
             });
 
             modelBuilder.Entity<Zakaz>(entity =>
@@ -143,7 +147,7 @@ namespace ToTaxi
 
                 entity.Property(e => e.AddresOtp).HasMaxLength(150);
 
-                entity.Property(e => e.DateZak).HasColumnType("datetime");
+                entity.Property(e => e.DateZak).HasColumnType("date");
 
                 entity.Property(e => e.WhoIszak).HasColumnName("WhoISZak");
 
