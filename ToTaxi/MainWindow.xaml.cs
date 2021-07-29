@@ -37,7 +37,8 @@ namespace ToTaxi
                 }
                 if ( Global._ID == 0)
                 {
-                    MessageBox.Show(" Введены некоректные данные", " Ошибека");
+                    MessageBox.Show(" Введены некоректные данные", " Ошибка");
+                    Pas1.Password = null;
                 }
                 else
                 {

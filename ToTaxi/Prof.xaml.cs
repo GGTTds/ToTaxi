@@ -72,8 +72,13 @@ namespace ToTaxi
                                     }
                                     catch
                                     {
-                                        File.Delete($@"Img/{f.Id}.Png");
-                                        FOIDG();
+                                        try
+                                        {
+                                            File.Delete($@"Img/{f.Id}.Png");
+                                            FOIDG();
+                                        }
+                                        catch
+                                        { }
                                     }
                                 }
                             }
