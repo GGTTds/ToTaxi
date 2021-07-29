@@ -37,13 +37,16 @@ namespace ToTaxi
 
         public void Adm()
         {
-            yp.Visibility = Visibility.Hidden;
-            rr.Visibility = Visibility.Hidden;
-            if (Global._Rol == 1)
+            if (Global._Rol != 1)
             {
-                yp.Visibility = Visibility.Visible;
-                rr.Visibility = Visibility.Visible;
+                yp.Visibility = Visibility.Hidden;
+                rr.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void yp_Click(object sender, RoutedEventArgs e)
+        {
+            Fram.MainFF.Navigate(new YprPol());
         }
     }
 }

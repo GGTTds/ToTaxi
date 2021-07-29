@@ -1,0 +1,49 @@
+﻿<Page x:Class="ToTaxi.YprPol"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ToTaxi"
+      mc:Ignorable="d"
+      Title="YprPol" Width="1059" Height="461">
+
+    <Grid x:Name="ff" HorizontalAlignment="Center" Width="1004"   >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="gf" Content="Управление пользователями" HorizontalAlignment="Left" Margin="-34,22,0,0" VerticalAlignment="Top" Width="280" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="dd" Margin="-50,164,354,41" Background="{x:Null}" IsReadOnly="True" AutoGenerateColumns="False" FontSize="14" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding full111}"/>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateBird0}"/>
+                <DataGridTextColumn Header="Эл.почта" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Tel}"/>
+                <DataGridTemplateColumn Visibility="Hidden">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="red_Click" x:Name="red" Width="30" Height="30">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/1200px-Edit_icon_(the_Noun_Project_30184).svg.png" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Visibility="Hidden">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Del_Click" x:Name="Del" Width="30" Height="30">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/561125.png" TileMode="None" Stretch="Uniform"/>
+                                </Button.Background>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="ff1" HorizontalAlignment="Left" Margin="24,82,0,0" Text="ФИО" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Введите сюда ФИО" GotFocus="TextBox_GotFocus"/>
+        <TextBox GotFocus="TextBox_GotFocus" x:Name="dd1" HorizontalAlignment="Left" Margin="284,82,0,0" Text="Дата рождения" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Пример: 19.06.2000"/>
+    </Grid>
+</Page>

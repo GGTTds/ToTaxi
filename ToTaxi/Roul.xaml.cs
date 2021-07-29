@@ -77,9 +77,10 @@ namespace ToTaxi
         }
         public void AdmV()
         {
-            if(Global._Rol == 1)
+            if(Global._Rol != 1)
             {
-
+                datg.Columns[2].Visibility = Visibility.Hidden;
+                datg_Copy.Columns[2].Visibility = Visibility.Hidden;
             }
         }
     }

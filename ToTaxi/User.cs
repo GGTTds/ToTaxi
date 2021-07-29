@@ -28,6 +28,7 @@ namespace ToTaxi
         public int? FuncPp { get; set; }
         public byte[] Photo { get; set; }
 
+        public string full111 => Name + " " + Fam + " " + " " + Otc;
         public virtual PolPol PolNavigation { get; set; }
         public virtual ICollection<FuncPp> FuncPps { get; set; }
         public virtual ICollection<RoulPp> RoulPps { get; set; }
