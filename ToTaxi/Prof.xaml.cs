@@ -64,6 +64,7 @@ namespace ToTaxi
             dat.SelectedDate = gf23.DateBird0;
             eml.Text = gf23.Email;
             fot = gf23.Photo;
+            Global.VX_ID = gf23.Id;
             if (m1.IsChecked == true)
             {
                 gf23.Pol = 10;
@@ -408,7 +409,14 @@ namespace ToTaxi
 
         private void Rol_Click(object sender, RoutedEventArgs e)
         {
-            Fram.MainFF.Navigate(new Roul());
+            if (Global.VX_ID == 0)
+            {
+                Fram.MainFF.Navigate(new Roul());
+            }
+            else
+            {
+                Fram.MainFF.Navigate(new Roul(Global.VX_ID));
+            }
         }
 
         public void ThisAddNewPol()

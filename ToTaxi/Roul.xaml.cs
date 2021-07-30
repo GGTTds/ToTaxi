@@ -19,26 +19,37 @@ namespace ToTaxi
     /// </summary>
     public partial class Roul : Page
     {
+        public int j = 0;
         public Roul()
         {
+            j = Global._ID;
             InitializeComponent();
             RolGrid();
             FunGrid();
             Rol.Background = Brushes.Black;
+        }
+        public Roul(int x)
+        {
+            InitializeComponent();
+            j = x;
+            RolGrid();
+            FunGrid();
+            Rol.Background = Brushes.Black;
+
         }
     
     public void RolGrid()
         {
             using(TaxiInDronContext v = new TaxiInDronContext())
             {
-                datg.ItemsSource = v.RoulPps.Where( p => p.WhoIsroul == Global._ID).ToList();
+                datg.ItemsSource = v.RoulPps.Where( p => p.WhoIsroul == j).ToList();
             }
         }
         public void FunGrid()
         {
             using (TaxiInDronContext v = new TaxiInDronContext())
             {
-              datg_Copy.ItemsSource = v.FuncPps.Where(p => p.WhoIsItFunc == Global._ID).ToList();
+              datg_Copy.ItemsSource = v.FuncPps.Where(p => p.WhoIsItFunc == j).ToList();
             }
         }
 
@@ -59,7 +70,7 @@ namespace ToTaxi
             {
                 v.RoulPps.RemoveRange(s);
                 v.SaveChanges();
-                datg.ItemsSource = v.RoulPps.Where(p => p.WhoIsroul == Global._ID).ToList();
+                datg.ItemsSource = v.RoulPps.Where(p => p.WhoIsroul == j).ToList();
 
             }
         }
@@ -71,7 +82,7 @@ namespace ToTaxi
             {
                 v.FuncPps.RemoveRange(s);
                 v.SaveChanges();
-                datg.ItemsSource = v.FuncPps.Where(p => p.WhoIsItFunc == Global._ID).ToList();
+                datg.ItemsSource = v.FuncPps.Where(p => p.WhoIsItFunc == j).ToList();
 
             }
         }
