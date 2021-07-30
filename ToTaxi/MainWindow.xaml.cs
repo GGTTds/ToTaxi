@@ -26,7 +26,7 @@ namespace ToTaxi
             InitializeComponent();
         }
 
-        private void vx_Click(object sender, RoutedEventArgs e)
+        private async void vx_Click(object sender, RoutedEventArgs e)
         {
             using (TaxiInDronContext re = new TaxiInDronContext())
             {
@@ -59,14 +59,14 @@ namespace ToTaxi
                 {
                     using (StreamWriter rty = new StreamWriter("login.ttr"))
                     {
-                        rty.WriteLine(Log1.Text);
+                       await rty.WriteLineAsync(Log1.Text);
                     }
                 }
                 else
                 {
                     using (StreamWriter rty = new StreamWriter("login.ttr"))
                     {
-                        rty.WriteLine("");
+                        await rty.WriteLineAsync("");
                     }
                 }
 
@@ -80,24 +80,18 @@ namespace ToTaxi
             this.Close();
         }
 
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            using (StreamReader we = new StreamReader("login.ttr"))
-            {
-                DF();
-            }
-        }
-
-        public void DF()
+        private async void Window_Activated(object sender, EventArgs e)
         {
             using (StreamReader we = new StreamReader("login.ttr"))
             {
                 if (we != null)
                 {
-                    Log1.Text = we.ReadLine();
+                     Log1.Text = we.ReadLineAsync().Result;
                 }
             }
         }
+
+       
 
     }
 }
