@@ -43,7 +43,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox KeyDown="ff1_KeyDown" x:Name="ff1" HorizontalAlignment="Left" Margin="24,82,0,0" Text="ФИО" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Введите сюда ФИО" GotFocus="TextBox_GotFocus"/>
-        <TextBox KeyDown="ff1_KeyDown" GotFocus="dd1_GotFocus" x:Name="dd1" HorizontalAlignment="Left" Margin="284,82,0,0" Text="Дата рождения" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Пример: 19.06.2000"/>
+        <TextBox TextChanged="ff1_TextChanged"  x:Name="ff1" HorizontalAlignment="Left" Margin="85,88,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" ToolTip="Введите сюда фамилию " GotFocus="TextBox_GotFocus"/>
+        <Label Content="Фамилия" HorizontalAlignment="Left" Margin="22,86,0,0" VerticalAlignment="Top" Width="63" Grid.ColumnSpan="2"/>
+        <Button Click="Button_Click" Content="Добавить" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="810,41,0,0" VerticalAlignment="Top" Height="34" Width="156" Background="#FF0D87DC"/>
     </Grid>
 </Page>

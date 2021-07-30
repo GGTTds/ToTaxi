@@ -24,7 +24,7 @@ namespace ToTaxi
         {
             InitializeComponent();
             GoTabl();
-
+            Red();
 
         }
 
@@ -35,7 +35,13 @@ namespace ToTaxi
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
-
+            var f = dd.SelectedItems.Cast<User>().ToList();
+            using(TaxiInDronContext v = new TaxiInDronContext())
+            {
+                v.RemoveRange(f);
+                v.SaveChanges();
+                GoTabl();
+            }
         }
 
         public void GoTabl()
@@ -51,10 +57,7 @@ namespace ToTaxi
         {
             ff1.Text = null;
         }
-        private void dd1_GotFocus(object sender, RoutedEventArgs e)
-        {
-            dd1.Text = null;
-        }
+       
 
         public void Red()
         {
@@ -75,38 +78,33 @@ namespace ToTaxi
     
         public void ToTextBox()
         {
-            if(ff1.Text.Length > 0)
+            if(ff1.Text != null)
             {
-                using( TaxiInDronContext g = new TaxiInDronContext())
-                {
-                    dd.ItemsSource = g.Users.Where(p => p.Fam.Contains(ff1.Text)).ToList();
-                }
-               
+                    dd.ItemsSource = v1.Where(p => p.Fam.Contains(ff1.Text)).ToList();
             }
-            if (ff1.Text.Length == 0)
-            {
-                dd.ItemsSource = v1;
-            }
-            if (dd1.Text.Length > 0)
-            {
-                using (TaxiInDronContext g = new TaxiInDronContext())
-                {
-                    dd.ItemsSource = g.Users.Where(p => p.DateBird0.ToString().Contains(ff1.Text)).ToList();
-                }
-            }
-            if (ff1.Text == null)
+            else 
             {
                 dd.ItemsSource = v1;
             }
 
         }
 
-        private void ff1_KeyDown(object sender, KeyEventArgs e)
+        
+
+        private void ff1_TextChanged(object sender, TextChangedEventArgs e)
         {
             ToTextBox();
         }
 
-      
+        private void dd1_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            ToTextBox();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }
