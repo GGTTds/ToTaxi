@@ -70,9 +70,9 @@ namespace ToTaxi
                         v.Users.Add(_user);
                         v.SaveChanges();
                         MessageBox.Show("Регистрация завершина", "Успешно");
-                        this.Close();
                         MainWindow we = new MainWindow();
                         we.Show();
+                        this.Close();
                     }
                     catch
                     {
