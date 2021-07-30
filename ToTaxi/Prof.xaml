@@ -30,6 +30,7 @@
         <TextBox x:Name="poll" HorizontalAlignment="Left" Margin="523,311,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
         <Label Content="Пол" Foreground="#FFFFE800" Margin="490,273,316,156" Background="{x:Null}"/>
         <Button Click="f2_Click" x:Name="f2" Content="Сохранить" HorizontalAlignment="Left" Margin="425,405,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FF3944B4"/>
+        <Button Click="Sav_2_Click" x:Name="Sav_2" Content="Сохранить" HorizontalAlignment="Left" Margin="425,405,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FF3944B4" Visibility="Hidden"/>
         <Button Click="f1_Click" x:Name="f1" Content="Отмена" HorizontalAlignment="Left" Margin="586,405,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FFB49D39"/>
         <Button x:Name="fg" Click="Button_Click" Content="Редактировать" HorizontalAlignment="Right" Margin="0,406,573,0" VerticalAlignment="Top" Width="134" Height="24" Background="#FF39B49E"/>
         <Label x:Name="gf" Content="Мой профиль" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>

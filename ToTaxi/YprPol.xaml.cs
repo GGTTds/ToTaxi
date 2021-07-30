@@ -103,7 +103,7 @@ namespace ToTaxi
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Fram.MainFF.Navigate(new Prof());
+            Fram.MainFF.Navigate(new Prof(null));
         }
     }
 

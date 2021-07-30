@@ -19,6 +19,7 @@ using Microsoft.Win32;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace ToTaxi
 {
@@ -38,6 +39,22 @@ namespace ToTaxi
             m1.Visibility = Visibility.Hidden;
             m2.Visibility = Visibility.Hidden;
             ls.Background = System.Windows.Media.Brushes.Black;
+        }
+        public Prof(User x)
+        {
+            InitializeComponent();
+            ls.Background = System.Windows.Media.Brushes.Black;
+            if (x == null)
+            {
+
+                ThisAddNewPol();
+                Sav_2.Visibility = Visibility.Visible;
+                f2.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+
+            }
         }
 
 
@@ -115,8 +132,6 @@ namespace ToTaxi
         {
             if (GoSave() == true)
             {
-
-
                 f2.Visibility = Visibility.Hidden;
                 f1.Visibility = Visibility.Hidden;
                 f1_Copy.Visibility = Visibility.Hidden;
@@ -124,9 +139,11 @@ namespace ToTaxi
                 m1.Visibility = Visibility.Hidden;
                 m2.Visibility = Visibility.Hidden;
             }
-            else { }
 
+            else { }
         }
+
+        
 
         private void f1_Click(object sender, RoutedEventArgs e)
         {
@@ -223,9 +240,10 @@ namespace ToTaxi
                     {
                         g.Pol = 11;
                     }
-                    v.SaveChanges();
-                    FOIDG();
-
+                    
+                        v.SaveChanges();
+                        FOIDG();
+                    
                     return true;
                 }
             }
@@ -235,6 +253,35 @@ namespace ToTaxi
             }
 
             return false;
+        }
+        public void NewPolAndUpd(User g)
+        {
+            if(g == null)
+            {
+                User h = new User();
+                using (TaxiInDronContext v = new TaxiInDronContext())
+                {
+                    h.Name = im.Text;
+                    h.Fam = fam.Text;
+                    h.Otc = ot.Text;
+                    h.PasswordInVx = pas.Password;
+                    h.Tel = tel.Text;
+                    h.DateBird0 = dat.SelectedDate;
+                    h.Email = eml.Text;
+                    h.Photo = fot;
+                    if (m1.IsChecked == true)
+                    {
+                        h.Pol = 10;
+                    }
+                    if (m2.IsChecked == true)
+                    {
+                        h.Pol = 11;
+                    }
+                    v.Add(h);
+                    v.SaveChanges();
+                    Fram.MainFF.Navigate(new YprPol());
+                }
+            }
         }
         public static bool IsValidEmail(string email)
         {
@@ -322,11 +369,11 @@ namespace ToTaxi
             pas.IsEnabled = true;
             poll.IsReadOnly = false;
         }
-    
-    
-    
-    
-    
+
+        private void Sav_2_Click(object sender, RoutedEventArgs e)
+        {
+            NewPolAndUpd(null);
+        }
     }
 }
 
