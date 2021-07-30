@@ -113,13 +113,18 @@ namespace ToTaxi
 
         private void f2_Click(object sender, RoutedEventArgs e)
         {
-            f2.Visibility = Visibility.Hidden;
-            f1.Visibility = Visibility.Hidden;
-            f1_Copy.Visibility = Visibility.Hidden;
-            fg.Visibility = Visibility.Visible;
-            m1.Visibility = Visibility.Hidden;
-            m2.Visibility = Visibility.Hidden;
-            GoSave();
+            if (GoSave() == true)
+            {
+
+
+                f2.Visibility = Visibility.Hidden;
+                f1.Visibility = Visibility.Hidden;
+                f1_Copy.Visibility = Visibility.Hidden;
+                fg.Visibility = Visibility.Visible;
+                m1.Visibility = Visibility.Hidden;
+                m2.Visibility = Visibility.Hidden;
+            }
+            else { }
 
         }
 
@@ -170,7 +175,7 @@ namespace ToTaxi
             }
         }
 
-        public void GoSave()
+        public bool GoSave()
         {
             StringBuilder B = new StringBuilder();
             if (pas.Password.Length < 6)
@@ -220,6 +225,8 @@ namespace ToTaxi
                     }
                     v.SaveChanges();
                     FOIDG();
+
+                    return true;
                 }
             }
             else
@@ -227,7 +234,7 @@ namespace ToTaxi
                 MessageBox.Show(B.ToString());
             }
 
-
+            return false;
         }
         public static bool IsValidEmail(string email)
         {
@@ -297,6 +304,29 @@ namespace ToTaxi
         {
             Fram.MainFF.Navigate(new Roul());
         }
+
+        public void ThisAddNewPol()
+        {
+            fg.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Visible;
+            f2.Visibility = Visibility.Visible;
+            f1_Copy.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Visible;
+            m2.Visibility = Visibility.Visible;
+            fam.IsReadOnly = false;
+            im.IsReadOnly = false;
+            ot.IsReadOnly = false;
+            eml.IsReadOnly = false;
+            tel.IsReadOnly = false;
+            dat.IsEnabled = true;
+            pas.IsEnabled = true;
+            poll.IsReadOnly = false;
+        }
+    
+    
+    
+    
+    
     }
 }
 
