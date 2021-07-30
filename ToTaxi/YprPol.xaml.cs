@@ -30,7 +30,7 @@ namespace ToTaxi
 
         private void red_Click(object sender, RoutedEventArgs e)
         {
-            
+            Fram.MainFF.Navigate(new Prof((sender as Button).DataContext as User));
         }
 
         private void Del_Click(object sender, RoutedEventArgs e)

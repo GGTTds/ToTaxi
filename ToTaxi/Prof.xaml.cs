@@ -29,6 +29,7 @@ namespace ToTaxi
     public partial class Prof : Page
     {
         byte[] fot;
+        public User gf23 = new User();
         public Prof()
         {
             InitializeComponent();
@@ -43,20 +44,35 @@ namespace ToTaxi
         public Prof(User x)
         {
             InitializeComponent();
+            gf23 = x;
             ls.Background = System.Windows.Media.Brushes.Black;
-            if (x == null)
+            Sav_2.Visibility = Visibility.Visible;
+            f2.Visibility = Visibility.Hidden;
+            ThisAddNewPol();
+            if (x != null)
             {
-
-                ThisAddNewPol();
-                Sav_2.Visibility = Visibility.Visible;
-                f2.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-
+                Zap();
             }
         }
-
+        public void Zap()
+        {
+            im.Text = gf23.Name;
+            fam.Text = gf23.Fam;
+            ot.Text = gf23.Otc;
+            pas.Password = gf23.PasswordInVx;
+            tel.Text = gf23.Tel;
+            dat.SelectedDate = gf23.DateBird0;
+            eml.Text = gf23.Email;
+            fot = gf23.Photo;
+            if (m1.IsChecked == true)
+            {
+                gf23.Pol = 10;
+            }
+            if (m2.IsChecked == true)
+            {
+                gf23.Pol = 11;
+            }
+        }
 
         public void FOIDG()
         {
@@ -133,11 +149,25 @@ namespace ToTaxi
             if (GoSave() == true)
             {
                 f2.Visibility = Visibility.Hidden;
-                f1.Visibility = Visibility.Hidden;
-                f1_Copy.Visibility = Visibility.Hidden;
-                fg.Visibility = Visibility.Visible;
+                im.Text = gf23.Name;
+                fam.Text = gf23.Fam;
+                ot.Text = gf23.Otc;
+                pas.Password = gf23.PasswordInVx;
+                tel.Text = gf23.Tel;
+                dat.SelectedDate = gf23.DateBird0;
+                eml.Text = gf23.Email;
+                fot = gf23.Photo;
+                if (m1.IsChecked == true)
+                {
+                    gf23.Pol = 10;
+                }
+                if (m2.IsChecked == true)
+                {
+                    gf23.Pol = 11;
+                }
                 m1.Visibility = Visibility.Hidden;
                 m2.Visibility = Visibility.Hidden;
+                Sav_2.Visibility = Visibility.Hidden;
             }
 
             else { }
@@ -254,32 +284,61 @@ namespace ToTaxi
 
             return false;
         }
-        public void NewPolAndUpd(User g)
+        public void NewPolAndUpd()
         {
-            if(g == null)
+            if(gf23 == null)
             {
-                User h = new User();
-                using (TaxiInDronContext v = new TaxiInDronContext())
+                User t = new User
                 {
-                    h.Name = im.Text;
-                    h.Fam = fam.Text;
-                    h.Otc = ot.Text;
-                    h.PasswordInVx = pas.Password;
-                    h.Tel = tel.Text;
-                    h.DateBird0 = dat.SelectedDate;
-                    h.Email = eml.Text;
-                    h.Photo = fot;
-                    if (m1.IsChecked == true)
-                    {
-                        h.Pol = 10;
-                    }
+                    Name = im.Text,
+                    Fam = fam.Text,
+                    Otc = ot.Text,
+                    PasswordInVx = pas.Password,
+                    Tel = tel.Text,
+                    DateBird0 = dat.SelectedDate,
+                    Email = eml.Text,
+                    Photo = fot
+                };
+                if (m1.IsChecked == true)
+                {
+                        t.Pol = 10;
+                }
                     if (m2.IsChecked == true)
                     {
-                        h.Pol = 11;
+                        t.Pol = 11;
                     }
-                    v.Add(h);
+                using (TaxiInDronContext v = new TaxiInDronContext())
+                {
+
+                    v.Add(t);
                     v.SaveChanges();
                     Fram.MainFF.Navigate(new YprPol());
+                }
+            }
+            else
+            {
+                using (TaxiInDronContext v = new TaxiInDronContext())
+                {
+                    var g = v.Users.Where(p => p.Id == gf23.Id).SingleOrDefault();
+                    g.Name = im.Text;
+                    g.Fam = fam.Text;
+                    g.Otc = ot.Text;
+                    g.PasswordInVx = pas.Password;
+                    g.Tel = tel.Text;
+                    g.DateBird0 = dat.SelectedDate;
+                    g.Email = eml.Text;
+                    g.Photo = fot;
+                if (m1.IsChecked == true)
+                {
+                        g.Pol = 10;
+                }
+                if (m2.IsChecked == true)
+                {
+                        g.Pol = 11;
+                }
+
+                    v.SaveChanges();
+                    FOIDG();
                 }
             }
         }
@@ -372,7 +431,11 @@ namespace ToTaxi
 
         private void Sav_2_Click(object sender, RoutedEventArgs e)
         {
-            NewPolAndUpd(null);
+                NewPolAndUpd();
+            fg.Visibility = Visibility.Visible;
+            f1.Visibility = Visibility.Hidden;
+            Sav_2.Visibility = Visibility.Hidden;
+
         }
     }
 }
