@@ -11,8 +11,8 @@
         <Label x:Name="gf" Content="Мой профиль" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
         <Button Name="ls" Click="ls_Click" Content="Личные данные" HorizontalAlignment="Left" Height="27" Margin="262,11,0,0" VerticalAlignment="Top" Width="142" Background="{x:Null}" Foreground="#FF2EFF00"/>
         <Button x:Name="Rol" Click="Rol_Click" Content="Роли" HorizontalAlignment="Left" Height="27" Margin="404,11,0,0" VerticalAlignment="Top" Width="142" Background="{x:Null}" Foreground="#FF2EFF00"/>
-        <Label x:Name="gf1" Content="Доступные роли" HorizontalAlignment="Left" Margin="27,84,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
-        <DataGrid x:Name="datg" Margin="20,127,722,149" Background="{x:Null}" IsReadOnly="True" AutoGenerateColumns="False" BorderBrush="{x:Null}" FontSize="20">
+        <Label x:Name="gf1" Content="Доступные роли" HorizontalAlignment="Left" Margin="27,129,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+        <DataGrid x:Name="datg" Margin="20,172,722,104" Background="{x:Null}" IsReadOnly="True" AutoGenerateColumns="False" BorderBrush="{x:Null}" FontSize="20">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" />
                 <DataGridTemplateColumn>
@@ -28,8 +28,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="gf1_Copy" Content="Доступные функции" HorizontalAlignment="Left" Margin="411,84,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
-        <DataGrid x:Name="datg_Copy" Margin="404,127,354,149" Background="{x:Null}" IsReadOnly="True" AutoGenerateColumns="False" BorderBrush="{x:Null}" FontSize="20">
+        <Label x:Name="gf1_Copy" Content="Доступные функции" HorizontalAlignment="Left" Margin="411,129,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+        <DataGrid x:Name="datg_Copy" Margin="404,172,354,104" Background="{x:Null}" IsReadOnly="True" AutoGenerateColumns="False" BorderBrush="{x:Null}" FontSize="20">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" />
                 <DataGridTemplateColumn>
@@ -45,6 +45,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Click="dde_Click" x:Name="dde" Content="Добавить" HorizontalAlignment="Left" Margin="556,81,0,0" VerticalAlignment="Top" Height="27" Width="99" Background="#FF235ACF"/>
 
     </Grid>
 </Page>

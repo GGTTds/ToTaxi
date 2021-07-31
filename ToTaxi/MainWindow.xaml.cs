@@ -35,7 +35,7 @@ namespace ToTaxi
                 {
                     Global._ID = b.Id;
                 }
-                var s1 = re.RoulPps.Where(p => p.WhoIsroul == Global._ID).Where(p => p.Name.Contains("Администратор"));
+                var s1 = re.RoulPps.Where(p => p.WhoIsroul == Global._ID);
                 foreach (var t in s1)
                 {
                     if (t.Name == "Администратор")

@@ -19,6 +19,8 @@ namespace ToTaxi
     /// </summary>
     public partial class Roul : Page
     {
+        public RoulPp ps1 = new RoulPp();
+        public RoulPp ps = new RoulPp();
         public int j = 0;
         public Roul()
         {
@@ -26,6 +28,7 @@ namespace ToTaxi
             InitializeComponent();
             RolGrid();
             FunGrid();
+            AdmV();
             Rol.Background = Brushes.Black;
         }
         public Roul(int x)
@@ -34,7 +37,9 @@ namespace ToTaxi
             j = x;
             RolGrid();
             FunGrid();
+            AdmV();
             Rol.Background = Brushes.Black;
+           
 
         }
     
@@ -42,7 +47,10 @@ namespace ToTaxi
         {
             using(TaxiInDronContext v = new TaxiInDronContext())
             {
-                datg.ItemsSource = v.RoulPps.Where( p => p.WhoIsroul == j).ToList();
+                var gsg = v.RoulPps.Where( p => p.WhoIsroul == j);
+                datg.ItemsSource = gsg.ToList();
+                ps = gsg.Where(p => p.Name == "Администратор").FirstOrDefault();
+                ps1 = gsg.Where(p => p.Name == "Пользователь").FirstOrDefault();
             }
         }
         public void FunGrid()
@@ -92,7 +100,15 @@ namespace ToTaxi
             {
                 datg.Columns[2].Visibility = Visibility.Hidden;
                 datg_Copy.Columns[2].Visibility = Visibility.Hidden;
+                dde.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void dde_Click(object sender, RoutedEventArgs e)
+        {
+            ToRoulForMod fd = new ToRoulForMod(ps,ps1);
+            fd.ShowDialog();
+
         }
     }
 

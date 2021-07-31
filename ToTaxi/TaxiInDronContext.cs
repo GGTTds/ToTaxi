@@ -66,7 +66,6 @@ namespace ToTaxi
                 entity.ToTable("RoulPP");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
                     .HasColumnName("ID");
 
                 entity.Property(e => e.Name).HasMaxLength(150);
