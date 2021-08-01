@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Text;
+using System.Linq;
 
 namespace ToTaxi
 {
@@ -51,7 +52,7 @@ namespace ToTaxi
                 {
                     de.Append("Введиете пароль \n");
                 }
-                if (de.Length == 0)
+                    if (de.Length == 0 && PasEnb.PasTry(ps1.Password).Length == 0)
                 {
                     try
                     {
@@ -81,7 +82,7 @@ namespace ToTaxi
                 }
                 else
                 {
-                    MessageBox.Show(de.ToString());
+                    MessageBox.Show(de.ToString() + PasEnb.PasTry(ps1.Password),"Ошибка");
                 }
             }
         }
@@ -130,6 +131,8 @@ namespace ToTaxi
             }
         }
 
+       
 
+        
     }
 }

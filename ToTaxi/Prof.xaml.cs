@@ -184,6 +184,7 @@ namespace ToTaxi
             fg.Visibility = Visibility.Visible;
             m1.Visibility = Visibility.Hidden;
             m2.Visibility = Visibility.Hidden;
+            Sav_2.Visibility = Visibility.Hidden;
             GoBack();
         }
 
@@ -225,24 +226,8 @@ namespace ToTaxi
 
         public bool GoSave()
         {
-            StringBuilder B = new StringBuilder();
-            if (pas.Password.Length < 6)
-            {
-                B.Append("Пароль слишком короткий\n");
-            }
-            if (pas.Password.Any(char.IsUpper) == false)
-            {
-                B.Append("Пароль должен содержать хотябы одну букву верхнего регистра\n");
-            }
-            if (pas.Password.Any(Char.IsLower) == false)
-            {
-                B.Append("Пароль должен содержать хотябы одну букву нижнего регистра\n");
-            }
-            if (IsValidEmail(eml.Text) == false)
-            {
-                B.Append(" Введеите корректнкю почту\n");
-            }
-            if (B.Length == 0)
+            
+            if (PasEnb.PasTry(pas.Password).Length == 0)
             {
                 fam.IsReadOnly = true;
                 im.IsReadOnly = true;
@@ -280,68 +265,74 @@ namespace ToTaxi
             }
             else
             {
-                MessageBox.Show(B.ToString());
+                MessageBox.Show(PasEnb.PasTry(pas.Password).ToString());
             }
 
             return false;
         }
         public void NewPolAndUpd()
         {
-            if(gf23 == null)
-            {
-                User t = new User
+            
+                if (gf23 == null)
                 {
-                    Name = im.Text,
-                    Fam = fam.Text,
-                    Otc = ot.Text,
-                    PasswordInVx = pas.Password,
-                    Tel = tel.Text,
-                    DateBird0 = dat.SelectedDate,
-                    Email = eml.Text,
-                    Photo = fot
-                };
-                if (m1.IsChecked == true)
-                {
+                    User t = new User
+                    {
+                        Name = im.Text,
+                        Fam = fam.Text,
+                        Otc = ot.Text,
+                        PasswordInVx = pas.Password,
+                        Tel = tel.Text,
+                        DateBird0 = dat.SelectedDate,
+                        Email = eml.Text,
+                        Photo = fot
+                    };
+                    if (m1.IsChecked == true)
+                    {
                         t.Pol = 10;
-                }
+                    }
                     if (m2.IsChecked == true)
                     {
                         t.Pol = 11;
                     }
-                using (TaxiInDronContext v = new TaxiInDronContext())
-                {
+                    using (TaxiInDronContext v = new TaxiInDronContext())
+                    {
 
-                    v.Add(t);
-                    v.SaveChanges();
-                    Fram.MainFF.Navigate(new YprPol());
+                        v.Add(t);
+                        v.SaveChanges();
+                        Fram.MainFF.Navigate(new YprPol());
+                    }
                 }
-            }
-            else
-            {
-                using (TaxiInDronContext v = new TaxiInDronContext())
+                else
                 {
-                    var g = v.Users.Where(p => p.Id == gf23.Id).SingleOrDefault();
-                    g.Name = im.Text;
-                    g.Fam = fam.Text;
-                    g.Otc = ot.Text;
-                    g.PasswordInVx = pas.Password;
-                    g.Tel = tel.Text;
-                    g.DateBird0 = dat.SelectedDate;
-                    g.Email = eml.Text;
-                    g.Photo = fot;
-                if (m1.IsChecked == true)
-                {
-                        g.Pol = 10;
-                }
-                if (m2.IsChecked == true)
-                {
-                        g.Pol = 11;
-                }
+                    using (TaxiInDronContext v = new TaxiInDronContext())
+                    {
+                        var g = v.Users.Where(p => p.Id == gf23.Id).SingleOrDefault();
+                        g.Name = im.Text;
+                        g.Fam = fam.Text;
+                        g.Otc = ot.Text;
+                        g.PasswordInVx = pas.Password;
+                        g.Tel = tel.Text;
+                        g.DateBird0 = dat.SelectedDate;
+                        g.Email = eml.Text;
+                        g.Photo = fot;
+                        if (m1.IsChecked == true)
+                        {
+                            g.Pol = 10;
+                        }
+                        if (m2.IsChecked == true)
+                        {
+                            g.Pol = 11;
+                        }
 
-                    v.SaveChanges();
-                    FOIDG();
+                        fg.Visibility = Visibility.Visible;
+                        f1.Visibility = Visibility.Hidden;
+                        f2.Visibility = Visibility.Hidden;
+                        Sav_2.Visibility = Visibility.Hidden;
+                        v.SaveChanges();
+                        FOIDG();
+                    }
                 }
-            }
+            
         }
         public static bool IsValidEmail(string email)
         {
@@ -439,10 +430,14 @@ namespace ToTaxi
 
         private void Sav_2_Click(object sender, RoutedEventArgs e)
         {
+            if (PasEnb.PasTry(pas.Password).Length == 0)
+            {
                 NewPolAndUpd();
-            fg.Visibility = Visibility.Visible;
-            f1.Visibility = Visibility.Hidden;
-            Sav_2.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                MessageBox.Show(PasEnb.PasTry(pas.Password).ToString());
+            }
 
         }
     }
