@@ -15,10 +15,10 @@
         <Image x:Name="w1"  HorizontalAlignment="Right" Height="173" Margin="0,56,700,0" VerticalAlignment="Top" Width="202"  />
         <TextBox x:Name="fam" HorizontalAlignment="Left" Margin="280,108,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
         <Label Content="Фамилия" Foreground="#FFFFE800" Margin="249,70,557,358" Background="{x:Null}"/>
-        <TextBox x:Name="im" HorizontalAlignment="Left" Margin="284,167,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
+        <TextBox x:Name="im" HorizontalAlignment="Left" Margin="279,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
         <Label Content="Имя" Foreground="#FFFFE800" Margin="251,129,556,299" Background="{x:Null}"/>
-        <TextBox x:Name="ot" HorizontalAlignment="Left" Margin="283,236,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
-        <Label Content="Отчество" Foreground="#FFFFE800" Margin="250,198,557,231" Background="{x:Null}"/>
+        <TextBox x:Name="log" HorizontalAlignment="Right" Margin="0,0,274,62" Text="" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="157" Background="{x:Null}" Foreground="White" Visibility="Hidden"/>
+        <Label x:Name="l" Content="Логин" Foreground="#FFFFE800" Margin="0,0,405,55" Background="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Disabled" Visibility="Hidden" HorizontalAlignment="Right" Width="112" Height="32" VerticalAlignment="Bottom"/>
         <TextBox x:Name="eml" HorizontalAlignment="Left" Margin="524,94,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
         <Label Content="Email" Foreground="#FFFFE800" Margin="491,56,315,373" Background="{x:Null}"/>
         <TextBox x:Name="tel" HorizontalAlignment="Left" Margin="523,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
@@ -29,16 +29,19 @@
         <PasswordBox x:Name="pas" HorizontalAlignment="Left" Margin="523,238,0,0" VerticalAlignment="Top" Width="158" Height="20" Background="{x:Null}" Foreground="White"/>
         <TextBox x:Name="poll" HorizontalAlignment="Left" Margin="523,311,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
         <Label Content="Пол" Foreground="#FFFFE800" Margin="490,273,316,156" Background="{x:Null}"/>
-        <Button Click="f2_Click" x:Name="f2" Content="Сохранить" HorizontalAlignment="Left" Margin="425,405,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FF3944B4"/>
-        <Button Click="Sav_2_Click" x:Name="Sav_2" Content="Сохранить" HorizontalAlignment="Left" Margin="425,405,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FF3944B4" Visibility="Hidden"/>
-        <Button Click="f1_Click" x:Name="f1" Content="Отмена" HorizontalAlignment="Left" Margin="586,405,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FFB49D39"/>
-        <Button x:Name="fg" Click="Button_Click" Content="Редактировать" HorizontalAlignment="Right" Margin="0,406,573,0" VerticalAlignment="Top" Width="134" Height="24" Background="#FF39B49E"/>
+        <Button Click="f2_Click" x:Name="f2" Content="Сохранить" HorizontalAlignment="Left" Margin="425,421,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FF39B43F"/>
+        <Button Click="Sav_2_Click" x:Name="Sav_2" Content="Сохранить" HorizontalAlignment="Left" Margin="425,421,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FF3944B4" Visibility="Hidden"/>
+        <Button Click="f1_Click" x:Name="f1" Content="Отмена" HorizontalAlignment="Left" Margin="586,421,0,0" VerticalAlignment="Top" Width="121" Height="25" Background="#FFB49D39"/>
+        <Button x:Name="fg" Click="Button_Click" Content="Редактировать" HorizontalAlignment="Right" Margin="0,422,573,0" VerticalAlignment="Top" Width="134" Height="24" Background="#FF39B49E"/>
         <Label x:Name="gf" Content="Мой профиль" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="192" Height="38" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
         <Button Click="f1_Copy_Click" x:Name="f1_Copy" Content="Изменить" HorizontalAlignment="Right" Margin="0,0,749,180" VerticalAlignment="Bottom" Width="120" Height="25" Background="#FFB49D39"/>
         <CheckBox x:Name="m1" Content="М" HorizontalAlignment="Left" Margin="536,347,0,0" VerticalAlignment="Top" Click="m1_Click"/>
         <CheckBox x:Name="m2" Content="Ж" HorizontalAlignment="Left" Margin="619,347,0,0" VerticalAlignment="Top" Click="m2_Click"/>
         <Button Name="ls" Click="ls_Click" Content="Личные данные" HorizontalAlignment="Left" Height="27" Margin="262,11,0,0" VerticalAlignment="Top" Width="142" Background="{x:Null}" Foreground="#FF2EFF00"/>
         <Button x:Name="Rol" Click="Rol_Click" Content="Роли" HorizontalAlignment="Left" Height="27" Margin="404,11,0,0" VerticalAlignment="Top" Width="142" Background="{x:Null}" Foreground="#FF2EFF00"/>
+        <TextBox x:Name="poll_Copy" HorizontalAlignment="Left" Margin="523,311,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
+        <TextBox x:Name="ot" HorizontalAlignment="Left" Margin="279,241,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" Background="{x:Null}" Foreground="White" IsReadOnly="True"/>
+        <Label Content="Отчество" Foreground="#FFFFE800" Margin="251,202,556,226" Background="{x:Null}"/>
 
     </Grid>
 </Page>

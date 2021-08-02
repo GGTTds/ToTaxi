@@ -11,15 +11,10 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Net;
 using Image = System.Drawing.Image;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using System.Windows.Media;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Threading.Tasks;
 
 namespace ToTaxi
 {
@@ -52,6 +47,11 @@ namespace ToTaxi
             if (x != null)
             {
                 Zap();
+            }
+            else
+            {
+                l.Visibility = Visibility.Visible;
+                log.Visibility = Visibility.Visible;
             }
         }
         public void Zap()
@@ -129,35 +129,123 @@ namespace ToTaxi
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            fg.Visibility = Visibility.Hidden;
-            f1.Visibility = Visibility.Visible;
-            f2.Visibility = Visibility.Visible;
-            f1_Copy.Visibility = Visibility.Visible;
-            m1.Visibility = Visibility.Visible;
-            m2.Visibility = Visibility.Visible;
-            fam.IsReadOnly = false;
-            im.IsReadOnly = false;
-            ot.IsReadOnly = false;
-            eml.IsReadOnly = false;
-            tel.IsReadOnly = false;
-            dat.IsEnabled = true;
-            pas.IsEnabled = true;
-            poll.IsReadOnly = false;
+            ButtVis();
+            WriterFalse();
         }
 
         private void f2_Click(object sender, RoutedEventArgs e)
         {
-            if (GoSave() == true)
+            gf23.Fam = fam.Text;
+            gf23.Name = im.Text;
+            gf23.Otc = ot.Text;
+            gf23.Email = eml.Text;
+            gf23.Tel = tel.Text;
+            gf23.DateBird0 = dat.SelectedDate;
+            gf23.PasswordInVx = pas.Password;
+            gf23.Photo = fot;
+            if (m1.IsChecked == true)
             {
-                f2.Visibility = Visibility.Hidden;
-                im.Text = gf23.Name;
+                gf23.Pol = 10;
+            }
+            if (m2.IsChecked == true)
+            {
+                gf23.Pol = 11;
+            }
+            if (PasEnb.PasTry(pas.Password).Length == 0)
+            {
+                if (ToEml.IsValidEmail(eml.Text) == true)
+                {
+                    SaveAndCreateAndUpdateUser d = new SaveAndCreateAndUpdateUser();
+
+                    if (d.UpdThisProf(gf23) == true)
+                    {
+                        ButtNotVis();
+                        WriterFalse();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Проверте Email");
+                }
+            }
+            else
+            {
+                MessageBox.Show(PasEnb.PasTry(pas.Password).ToString());
+            }
+        }
+
+        private void f1_Click(object sender, RoutedEventArgs e)
+        {
+            ButtNotVis();
+            GoBack();
+        }
+
+        public void GoBack()
+        {
+            using (TaxiInDronContext v = new TaxiInDronContext())
+            {
+                gf23 = v.Users.Where(p => p.Id == Global._ID).SingleOrDefault();
                 fam.Text = gf23.Fam;
+                im.Text = gf23.Name;
                 ot.Text = gf23.Otc;
-                pas.Password = gf23.PasswordInVx;
+                eml.Text = gf23.Email;
                 tel.Text = gf23.Tel;
                 dat.SelectedDate = gf23.DateBird0;
-                eml.Text = gf23.Email;
-                fot = gf23.Photo;
+                pas.Password = gf23.PasswordInVx;
+                if (gf23.Pol == 10)
+                {
+                    poll.Text = "Мужчина";
+                    m1.IsChecked = true;
+                }
+                else
+                {
+                    poll.Text = "Женщина";
+                    m2.IsChecked = true;
+                }
+                WriterTrue();
+            }
+        }
+
+        public void NewPolAndUpd()
+        {
+            if (gf23 == null)
+            {
+                User t = new User
+                {
+                    Name = im.Text,
+                    Fam = fam.Text,
+                    Otc = ot.Text,
+                    PasswordInVx = pas.Password,
+                    Tel = tel.Text,
+                    DateBird0 = dat.SelectedDate,
+                    Email = eml.Text,
+                    Photo = fot
+                };
+                t.LogininVx = log.Text;
+                if (m1.IsChecked == true)
+                {
+                    t.Pol = 10;
+                }
+                if (m2.IsChecked == true)
+                {
+                    t.Pol = 11;
+                }
+                SaveAndCreateAndUpdateUser h = new SaveAndCreateAndUpdateUser();
+                h.AddNewPol(t);
+                l.Visibility = Visibility.Hidden;
+                log.Visibility = Visibility.Hidden;
+                Fram.MainFF.Navigate(new YprPol());
+            }
+            else
+            {
+                gf23.Name = im.Text;
+                gf23.Fam = fam.Text;
+                gf23.Otc = ot.Text;
+                gf23.PasswordInVx = pas.Password;
+                gf23.Tel = tel.Text;
+                gf23.DateBird0 = dat.SelectedDate;
+                gf23.Email = eml.Text;
+                gf23.Photo = fot;
                 if (m1.IsChecked == true)
                 {
                     gf23.Pol = 10;
@@ -166,182 +254,12 @@ namespace ToTaxi
                 {
                     gf23.Pol = 11;
                 }
-                m1.Visibility = Visibility.Hidden;
-                m2.Visibility = Visibility.Hidden;
-                Sav_2.Visibility = Visibility.Hidden;
-            }
-
-            else { }
-        }
-
-        
-
-        private void f1_Click(object sender, RoutedEventArgs e)
-        {
-            f2.Visibility = Visibility.Hidden;
-            f1.Visibility = Visibility.Hidden;
-            f1_Copy.Visibility = Visibility.Hidden;
-            fg.Visibility = Visibility.Visible;
-            m1.Visibility = Visibility.Hidden;
-            m2.Visibility = Visibility.Hidden;
-            Sav_2.Visibility = Visibility.Hidden;
-            GoBack();
-        }
-
-        public void GoBack()
-        {
-            using (TaxiInDronContext v = new TaxiInDronContext())
-            {
-                var s = v.Users.Where(p => p.Id == Global._ID);
-                foreach (var f in s)
-                {
-                    fam.Text = f.Fam;
-                    im.Text = f.Name;
-                    ot.Text = f.Otc;
-                    eml.Text = f.Email;
-                    tel.Text = f.Tel;
-                    dat.SelectedDate = f.DateBird0;
-                    pas.Password = f.PasswordInVx;
-                    if (f.Pol == 10)
-                    {
-                        poll.Text = "Мужчина";
-                        m1.IsChecked = true;
-                    }
-                    else
-                    {
-                        poll.Text = "Женщина";
-                        m2.IsChecked = true;
-                    }
-                    fam.IsReadOnly = true;
-                    im.IsReadOnly = true;
-                    ot.IsReadOnly = true;
-                    eml.IsReadOnly = true;
-                    tel.IsReadOnly = true;
-                    dat.IsEnabled = false;
-                    pas.IsEnabled = false;
-                    poll.IsReadOnly = true;
-                }
+                SaveAndCreateAndUpdateUser h = new SaveAndCreateAndUpdateUser();
+                h.UpdThisProf(gf23);
+                ButtNotVis();
+                FOIDG();
             }
         }
-
-        public bool GoSave()
-        {
-            
-            if (PasEnb.PasTry(pas.Password).Length == 0)
-            {
-                if (ToEml.IsValidEmail(eml.Text) == true)
-                {
-                    fam.IsReadOnly = true;
-                    im.IsReadOnly = true;
-                    ot.IsReadOnly = true;
-                    eml.IsReadOnly = true;
-                    tel.IsReadOnly = true;
-                    dat.IsEnabled = false;
-                    pas.IsEnabled = false;
-                    poll.IsReadOnly = true;
-                    using (TaxiInDronContext v = new TaxiInDronContext())
-                    {
-                        var g = v.Users.Where(p => p.Id == Global._ID).SingleOrDefault();
-                        g.Name = im.Text;
-                        g.Fam = fam.Text;
-                        g.Otc = ot.Text;
-                        g.PasswordInVx = pas.Password;
-                        g.Tel = tel.Text;
-                        g.DateBird0 = dat.SelectedDate;
-                        g.Email = eml.Text;
-                        g.Photo = fot;
-                        if (m1.IsChecked == true)
-                        {
-                            g.Pol = 10;
-                        }
-                        if (m2.IsChecked == true)
-                        {
-                            g.Pol = 11;
-                        }
-
-                        v.SaveChanges();
-                        FOIDG();
-
-                        return true;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Некорректный email");
-                }
-            }
-            else
-            {
-                MessageBox.Show(PasEnb.PasTry(pas.Password).ToString());
-            }
-
-            return false;
-        }
-        public void NewPolAndUpd()
-        {
-            
-                if (gf23 == null)
-                {
-                    User t = new User
-                    {
-                        Name = im.Text,
-                        Fam = fam.Text,
-                        Otc = ot.Text,
-                        PasswordInVx = pas.Password,
-                        Tel = tel.Text,
-                        DateBird0 = dat.SelectedDate,
-                        Email = eml.Text,
-                        Photo = fot
-                    };
-                    if (m1.IsChecked == true)
-                    {
-                        t.Pol = 10;
-                    }
-                    if (m2.IsChecked == true)
-                    {
-                        t.Pol = 11;
-                    }
-                    using (TaxiInDronContext v = new TaxiInDronContext())
-                    {
-
-                        v.Add(t);
-                        v.SaveChanges();
-                        Fram.MainFF.Navigate(new YprPol());
-                    }
-                }
-                else
-                {
-                    using (TaxiInDronContext v = new TaxiInDronContext())
-                    {
-                        var g = v.Users.Where(p => p.Id == gf23.Id).SingleOrDefault();
-                        g.Name = im.Text;
-                        g.Fam = fam.Text;
-                        g.Otc = ot.Text;
-                        g.PasswordInVx = pas.Password;
-                        g.Tel = tel.Text;
-                        g.DateBird0 = dat.SelectedDate;
-                        g.Email = eml.Text;
-                        g.Photo = fot;
-                        if (m1.IsChecked == true)
-                        {
-                            g.Pol = 10;
-                        }
-                        if (m2.IsChecked == true)
-                        {
-                            g.Pol = 11;
-                        }
-
-                        fg.Visibility = Visibility.Visible;
-                        f1.Visibility = Visibility.Hidden;
-                        f2.Visibility = Visibility.Hidden;
-                        Sav_2.Visibility = Visibility.Hidden;
-                        v.SaveChanges();
-                        FOIDG();
-                    }
-                }
-            
-        }
-        
 
         private void f1_Copy_Click(object sender, RoutedEventArgs e)
         {
@@ -386,12 +304,43 @@ namespace ToTaxi
 
         public void ThisAddNewPol()
         {
-            fg.Visibility = Visibility.Hidden;
-            f1.Visibility = Visibility.Visible;
-            f2.Visibility = Visibility.Visible;
-            f1_Copy.Visibility = Visibility.Visible;
-            m1.Visibility = Visibility.Visible;
-            m2.Visibility = Visibility.Visible;
+            ButtVis();
+            WriterFalse();
+        }
+
+        private void Sav_2_Click(object sender, RoutedEventArgs e)
+        {
+            if (PasEnb.PasTry(pas.Password).Length == 0)
+            {
+                if (ToEml.IsValidEmail(eml.Text) == true)
+                {
+                    if (log.Text.Length != 0)
+                        NewPolAndUpd();
+                    else MessageBox.Show("Введите логин");
+                }
+                else
+                { MessageBox.Show("Некорректный email"); }
+            }
+            else
+            {
+                MessageBox.Show(PasEnb.PasTry(pas.Password).ToString());
+            }
+
+        }
+        // Vis\NonVis button and textBox
+        public void WriterTrue()
+        {
+            fam.IsReadOnly = true;
+            im.IsReadOnly = true;
+            ot.IsReadOnly = true;
+            eml.IsReadOnly = true;
+            tel.IsReadOnly = true;
+            dat.IsEnabled = false;
+            pas.IsEnabled = false;
+            poll.IsReadOnly = true;
+        }
+        public void WriterFalse()
+        {
             fam.IsReadOnly = false;
             im.IsReadOnly = false;
             ot.IsReadOnly = false;
@@ -402,22 +351,24 @@ namespace ToTaxi
             poll.IsReadOnly = false;
         }
 
-        private void Sav_2_Click(object sender, RoutedEventArgs e)
+        public void ButtVis()
         {
-            if (PasEnb.PasTry(pas.Password).Length == 0)
-            {
-                if (ToEml.IsValidEmail(eml.Text) == true)
-                {
-                    NewPolAndUpd();
-                }
-                else
-                { MessageBox.Show("Некорректный email"); }
-            }
-            else
-            {
-                MessageBox.Show(PasEnb.PasTry(pas.Password).ToString());
-            }
-
+            fg.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Visible;
+            f2.Visibility = Visibility.Visible;
+            f1_Copy.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Visible;
+            m2.Visibility = Visibility.Visible;
+        }
+        public void ButtNotVis()
+        {
+            f2.Visibility = Visibility.Hidden;
+            f1.Visibility = Visibility.Hidden;
+            f1_Copy.Visibility = Visibility.Hidden;
+            fg.Visibility = Visibility.Visible;
+            m1.Visibility = Visibility.Hidden;
+            m2.Visibility = Visibility.Hidden;
+            Sav_2.Visibility = Visibility.Hidden;
         }
     }
 }
