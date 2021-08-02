@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace ToTaxi
 {
-    class ToEml
+    public class ToEml
     {
         public static bool IsValidEmail(string email)
         {

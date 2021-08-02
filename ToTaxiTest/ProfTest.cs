@@ -10,10 +10,10 @@ namespace ToTaxiTest
         public void In_6CharAndlowerAndupped_TrueReturn()
         {
             // Arrange
-            string x = "SDFF16xs";
+            string ValidPasw = "SDFF16xs";
             int exp = 0;
             // Act
-            StringBuilder fd = PasEnb.PasTry(x);
+            StringBuilder fd = PasEnb.PasTry(ValidPasw);
             // Assert
             Assert.AreEqual(exp,fd.Length);
         }
