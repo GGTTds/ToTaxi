@@ -40,9 +40,9 @@ namespace ToTaxi
                 {
                     de.Append("Введиете телефон \n");
                 }
-                if (eml.Text.Length == 0)
+                if (ToEml.IsValidEmail(eml.Text) == false)
                 {
-                    de.Append("Введиете email \n");
+                    de.Append("Введиете корректный email \n");
                 }
                 if (Log.Text.Length == 0)
                 {

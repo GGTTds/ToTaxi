@@ -229,38 +229,45 @@ namespace ToTaxi
             
             if (PasEnb.PasTry(pas.Password).Length == 0)
             {
-                fam.IsReadOnly = true;
-                im.IsReadOnly = true;
-                ot.IsReadOnly = true;
-                eml.IsReadOnly = true;
-                tel.IsReadOnly = true;
-                dat.IsEnabled = false;
-                pas.IsEnabled = false;
-                poll.IsReadOnly = true;
-                using (TaxiInDronContext v = new TaxiInDronContext())
+                if (ToEml.IsValidEmail(eml.Text) == true)
                 {
-                    var g = v.Users.Where(p => p.Id == Global._ID).SingleOrDefault();
-                    g.Name = im.Text;
-                    g.Fam = fam.Text;
-                    g.Otc = ot.Text;
-                    g.PasswordInVx = pas.Password;
-                    g.Tel = tel.Text;
-                    g.DateBird0 = dat.SelectedDate;
-                    g.Email = eml.Text;
-                    g.Photo = fot;
-                    if (m1.IsChecked == true)
+                    fam.IsReadOnly = true;
+                    im.IsReadOnly = true;
+                    ot.IsReadOnly = true;
+                    eml.IsReadOnly = true;
+                    tel.IsReadOnly = true;
+                    dat.IsEnabled = false;
+                    pas.IsEnabled = false;
+                    poll.IsReadOnly = true;
+                    using (TaxiInDronContext v = new TaxiInDronContext())
                     {
-                        g.Pol = 10;
-                    }
-                    if (m2.IsChecked == true)
-                    {
-                        g.Pol = 11;
-                    }
-                    
+                        var g = v.Users.Where(p => p.Id == Global._ID).SingleOrDefault();
+                        g.Name = im.Text;
+                        g.Fam = fam.Text;
+                        g.Otc = ot.Text;
+                        g.PasswordInVx = pas.Password;
+                        g.Tel = tel.Text;
+                        g.DateBird0 = dat.SelectedDate;
+                        g.Email = eml.Text;
+                        g.Photo = fot;
+                        if (m1.IsChecked == true)
+                        {
+                            g.Pol = 10;
+                        }
+                        if (m2.IsChecked == true)
+                        {
+                            g.Pol = 11;
+                        }
+
                         v.SaveChanges();
                         FOIDG();
-                    
-                    return true;
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Некорректный email");
                 }
             }
             else
@@ -334,40 +341,7 @@ namespace ToTaxi
                 }
             
         }
-        public static bool IsValidEmail(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
-            try
-            {
-                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
-                string DomainMapper(Match match)
-                {
-                    var idn = new IdnMapping();
-                    string domainName = idn.GetAscii(match.Groups[2].Value);
-                    return match.Groups[1].Value + domainName;
-                }
-            }
-            catch (RegexMatchTimeoutException e)
-            {
-                return false;
-            }
-            catch (ArgumentException e)
-            {
-                return false;
-            }
-            try
-            {
-                return Regex.IsMatch(email,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                return false;
-            }
-        }
+        
 
         private void f1_Copy_Click(object sender, RoutedEventArgs e)
         {
@@ -432,7 +406,12 @@ namespace ToTaxi
         {
             if (PasEnb.PasTry(pas.Password).Length == 0)
             {
-                NewPolAndUpd();
+                if (ToEml.IsValidEmail(eml.Text) == true)
+                {
+                    NewPolAndUpd();
+                }
+                else
+                { MessageBox.Show("Некорректный email"); }
             }
             else
             {
