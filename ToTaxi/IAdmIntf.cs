@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ToTaxi
 {
-    interface IAdmIntf
+    public interface IAdmIntf
     {
         public bool UpdThisProf(User r);
-        public void AddNewPol(User r);
+        public bool AddNewPol(User r);
     }
 }

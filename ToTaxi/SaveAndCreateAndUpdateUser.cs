@@ -5,14 +5,15 @@ using System.Linq;
 
 namespace ToTaxi
 {
-    class SaveAndCreateAndUpdateUser : IAdmIntf
+    public class SaveAndCreateAndUpdateUser : IAdmIntf
     {
         public bool UpdThisProf(User r)
         {
-            using (TaxiInDronContext v = new TaxiInDronContext())
+            try
             {
-                var g = v.Users.Where(p => p.Id == r.Id).SingleOrDefault();
+                using (TaxiInDronContext v = new TaxiInDronContext())
                 {
+                    var g = v.Users.Where(p => p.Id == r.Id).SingleOrDefault();
                     g.Id = r.Id;
                     g.Zakazs = r.Zakazs;
                     g.Name = r.Name;
@@ -31,18 +32,26 @@ namespace ToTaxi
                     g.Tel = r.Tel;
                     v.Users.Update(g);
                     v.SaveChanges();
+                    return true;
+
                 }
             }
-
-                return false;
-        }
-        public void AddNewPol(User r)
-        {
-            using(TaxiInDronContext v = new TaxiInDronContext())
-            {
-                v.Users.Add(r);
-                v.SaveChanges();
+            catch { return false; }
             }
+
+
+        public bool AddNewPol(User r)
+        {
+            try
+            {
+                using (TaxiInDronContext v = new TaxiInDronContext())
+                {
+                    v.Users.Add(r);
+                    v.SaveChanges();
+                    return true;
+                }
+            }
+            catch { return false; }
         }
 
     }
