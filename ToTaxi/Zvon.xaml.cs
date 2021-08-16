@@ -33,9 +33,11 @@ namespace ToTaxi
             }
         }
 
-        private void red_Click(object sender, RoutedEventArgs e)
+        private async void red_Click(object sender, RoutedEventArgs e)
         {
-
+            Operetor r = new Operetor();
+            await r.CloseZvon((sender as Button).DataContext as Zvonk);
+            ToGridData();
         }
     }
 }
