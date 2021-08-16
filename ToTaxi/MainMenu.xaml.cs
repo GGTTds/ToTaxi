@@ -41,12 +41,18 @@ namespace ToTaxi
             {
                 yp.Visibility = Visibility.Hidden;
                 rr.Visibility = Visibility.Hidden;
+                prof_Copy.Visibility = Visibility.Hidden;
             }
         }
 
         private void yp_Click(object sender, RoutedEventArgs e)
         {
             Fram.MainFF.Navigate(new YprPol());
+        }
+
+        private void prof_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            Fram.MainFF.Navigate(new Zvon());
         }
     }
 }

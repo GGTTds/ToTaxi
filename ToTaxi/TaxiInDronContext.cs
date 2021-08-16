@@ -24,6 +24,7 @@ namespace ToTaxi
         public virtual DbSet<TransTt> TransTts { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Zakaz> Zakazs { get; set; }
+        public virtual DbSet<Zvonk> Zvonks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -50,6 +51,15 @@ namespace ToTaxi
                     .WithMany(p => p.FuncPps)
                     .HasForeignKey(d => d.WhoIsItFunc)
                     .HasConstraintName("FK_User_FuncPP");
+            });
+            modelBuilder.Entity<Zvonk>(entity =>
+            {
+                entity.ToTable("Zvonk");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Name).HasMaxLength(200);
+                entity.Property(e => e.Tel).HasMaxLength(50);
             });
 
             modelBuilder.Entity<PolPol>(entity =>
