@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ToTaxi
 {
     public class SaveAndCreateAndUpdateUser : IAdmIntf
     {
-        public bool UpdThisProf(User r)
+        public async Task<bool> UpdThisProf(User r)
         {
             try
             {
@@ -31,7 +32,7 @@ namespace ToTaxi
                     g.RoulPps = r.RoulPps;
                     g.Tel = r.Tel;
                     v.Users.Update(g);
-                    v.SaveChanges();
+                    await v.SaveChangesAsync();
                     return true;
 
                 }
@@ -40,14 +41,14 @@ namespace ToTaxi
             }
 
 
-        public bool AddNewPol(User r)
+        public async Task<bool> AddNewPol(User r)
         {
             try
             {
                 using (TaxiInDronContext v = new TaxiInDronContext())
                 {
                     v.Users.Add(r);
-                    v.SaveChanges();
+                    await v.SaveChangesAsync();
                     return true;
                 }
             }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ToTaxi
 {
     public interface IAdmIntf
     {
-        public bool UpdThisProf(User r);
-        public bool AddNewPol(User r);
+        public Task<bool> UpdThisProf(User r);
+        public Task<bool> AddNewPol(User r);
     }
 }

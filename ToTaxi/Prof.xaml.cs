@@ -133,7 +133,7 @@ namespace ToTaxi
             WriterFalse();
         }
 
-        private void f2_Click(object sender, RoutedEventArgs e)
+        private async void f2_Click(object sender, RoutedEventArgs e)
         {
             gf23.Fam = fam.Text;
             gf23.Name = im.Text;
@@ -157,7 +157,7 @@ namespace ToTaxi
                 {
                     SaveAndCreateAndUpdateUser d = new SaveAndCreateAndUpdateUser();
 
-                    if (d.UpdThisProf(gf23) == true)
+                    if ( await d.UpdThisProf(gf23) == true)
                     {
                         ButtNotVis();
                         WriterFalse();
@@ -206,7 +206,7 @@ namespace ToTaxi
             }
         }
 
-        public void NewPolAndUpd()
+        public async void NewPolAndUpd()
         {
             if (gf23 == null)
             {
@@ -231,7 +231,7 @@ namespace ToTaxi
                     t.Pol = 11;
                 }
                 SaveAndCreateAndUpdateUser h = new SaveAndCreateAndUpdateUser();
-                h.AddNewPol(t);
+                await h.AddNewPol(t);
                 l.Visibility = Visibility.Hidden;
                 log.Visibility = Visibility.Hidden;
                 Fram.MainFF.Navigate(new YprPol());
@@ -255,7 +255,7 @@ namespace ToTaxi
                     gf23.Pol = 11;
                 }
                 SaveAndCreateAndUpdateUser h = new SaveAndCreateAndUpdateUser();
-                h.UpdThisProf(gf23);
+                await h.UpdThisProf(gf23);
                 ButtNotVis();
                 FOIDG();
             }
