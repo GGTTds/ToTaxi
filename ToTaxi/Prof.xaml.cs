@@ -15,6 +15,8 @@ using System.Net;
 using Image = System.Drawing.Image;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace ToTaxi
 {
@@ -74,27 +76,25 @@ namespace ToTaxi
                 gf23.Pol = 11;
             }
         }
-
-        public void FOIDG()
+        public async void FOIDG()
         {
-            using (TaxiInDronContext y = new TaxiInDronContext())
+            await using (TaxiInDronContext y = new TaxiInDronContext())
             {
-                var s = y.Users.Where(p => p.Id == Global._ID);
+                 var s = y.Users.Where(p => p.Id == Global._ID);
                 foreach (var f in s)
                     if (f.Photo == null)
-                    { GoBack(); }
+                    { await Dispatcher.BeginInvoke(GoBack); }
                     else
                     {
-
+                        var path = $@"Img/{f.Id}.Png";
                         {
-                            using (MemoryStream ms = new MemoryStream(f.Photo))
+                           await using (MemoryStream ms = new MemoryStream(f.Photo))
                             {
                                 using (Image img = Image.FromStream(ms))
                                 {
                                     try
                                     {
                                         img.Save($@"Img/{f.Id}.Png");
-                                        var path = $@"Img/{f.Id}.Png";
                                         Bitmap bmp = new Bitmap(path);
                                         MemoryStream ms1 = new MemoryStream();
                                         bmp.Save(ms1, ImageFormat.Png);
@@ -109,7 +109,7 @@ namespace ToTaxi
                                     {
                                         try
                                         {
-                                            File.Delete($@"Img/{f.Id}.Png");
+                                            File.Delete(path);
                                             FOIDG();
                                         }
                                         catch
@@ -118,8 +118,7 @@ namespace ToTaxi
                                 }
                             }
                         }
-
-                        GoBack();
+                        await Dispatcher.BeginInvoke(GoBack);
 
                     }
 
@@ -370,6 +369,7 @@ namespace ToTaxi
             m2.Visibility = Visibility.Hidden;
             Sav_2.Visibility = Visibility.Hidden;
         }
+            
     }
 }
 
