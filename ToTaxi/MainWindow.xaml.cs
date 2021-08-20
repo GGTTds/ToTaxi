@@ -80,7 +80,7 @@ namespace ToTaxi
             this.Close();
         }
 
-        private async void Window_Activated(object sender, EventArgs e)
+        private void Window_Activated(object sender, EventArgs e)
         {
             using (StreamReader we = new StreamReader("login.ttr"))
             {

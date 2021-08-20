@@ -76,11 +76,11 @@ namespace ToTaxi
                 gf23.Pol = 11;
             }
         }
-        public async void FOIDG()
+        public async Task FOIDG()
         {
             await using (TaxiInDronContext y = new TaxiInDronContext())
             {
-                 var s = y.Users.Where(p => p.Id == Global._ID);
+                var s = y.Users.Where(p => p.Id == Global._ID);
                 foreach (var f in s)
                     if (f.Photo == null)
                     { await Dispatcher.BeginInvoke(GoBack); }
@@ -88,7 +88,7 @@ namespace ToTaxi
                     {
                         var path = $@"Img/{f.Id}.Png";
                         {
-                           await using (MemoryStream ms = new MemoryStream(f.Photo))
+                            await using (MemoryStream ms = new MemoryStream(f.Photo))
                             {
                                 using (Image img = Image.FromStream(ms))
                                 {
@@ -110,7 +110,7 @@ namespace ToTaxi
                                         try
                                         {
                                             File.Delete(path);
-                                            FOIDG();
+                                            await FOIDG();
                                         }
                                         catch
                                         { }
@@ -121,6 +121,7 @@ namespace ToTaxi
                         await Dispatcher.BeginInvoke(GoBack);
 
                     }
+            
 
             }
 
@@ -179,9 +180,9 @@ namespace ToTaxi
             GoBack();
         }
 
-        public void GoBack()
+        public async void GoBack()
         {
-            using (TaxiInDronContext v = new TaxiInDronContext())
+            await using (TaxiInDronContext v = new TaxiInDronContext())
             {
                 gf23 = v.Users.Where(p => p.Id == Global._ID).SingleOrDefault();
                 fam.Text = gf23.Fam;
@@ -205,7 +206,7 @@ namespace ToTaxi
             }
         }
 
-        public async void NewPolAndUpd()
+        public async Task NewPolAndUpd()
         {
             if (gf23 == null)
             {
@@ -256,17 +257,17 @@ namespace ToTaxi
                 SaveAndCreateAndUpdateUser h = new SaveAndCreateAndUpdateUser();
                 await h.UpdThisProf(gf23);
                 ButtNotVis();
-                FOIDG();
+                await FOIDG();
             }
         }
 
-        private void f1_Copy_Click(object sender, RoutedEventArgs e)
+        private async void F1_Copy_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dia = new OpenFileDialog();
             dia.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
             if (dia.ShowDialog() == true)
             {
-                fot = File.ReadAllBytes(dia.FileName);
+                fot = await File.ReadAllBytesAsync(dia.FileName);
             }
             if (fot != null)
             {
@@ -303,18 +304,18 @@ namespace ToTaxi
 
         public void ThisAddNewPol()
         {
-            ButtVis();
-            WriterFalse();
+             ButtVis();
+             WriterFalse();
         }
 
-        private void Sav_2_Click(object sender, RoutedEventArgs e)
+        private async void Sav_2_Click(object sender, RoutedEventArgs e)
         {
             if (PasEnb.PasTry(pas.Password).Length == 0)
             {
                 if (ToEml.IsValidEmail(eml.Text) == true)
                 {
                     if (log.Text.Length != 0)
-                        NewPolAndUpd();
+                         await NewPolAndUpd();
                     else MessageBox.Show("Введите логин");
                 }
                 else
@@ -369,7 +370,8 @@ namespace ToTaxi
             m2.Visibility = Visibility.Hidden;
             Sav_2.Visibility = Visibility.Hidden;
         }
-            
+
+       
     }
 }
 

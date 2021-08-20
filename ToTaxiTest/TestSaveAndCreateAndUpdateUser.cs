@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ToTaxi;
 
@@ -28,22 +29,22 @@ namespace ToTaxiTest
             UserTest = NewUser;
         }
         [TestMethod]
-        public void SaveProfReturnTrue()
+        public async Task SaveProfReturnTrue()
         {
             //Act
             SaveAndCreateAndUpdateUser _TestClass = new SaveAndCreateAndUpdateUser();
-            bool IsTrueAddnewUser = _TestClass.AddNewPol(UserTest);
+            bool IsTrueAddnewUser = await _TestClass.AddNewPol(UserTest);
             //Assert
             Assert.IsTrue(IsTrueAddnewUser);
         }
         [TestMethod]
-        public void UpdateThisPol()
+        public async Task UpdateThisPol()
         {
             //Arrange
             UserTest.Name = "NewName";
             //Act
             SaveAndCreateAndUpdateUser _TestClass = new SaveAndCreateAndUpdateUser();
-            bool IsTrueUpdUser = _TestClass.UpdThisProf(UserTest);
+            bool IsTrueUpdUser = await _TestClass.UpdThisProf(UserTest);
             // Assert
             Assert.IsTrue(IsTrueUpdUser);
             
